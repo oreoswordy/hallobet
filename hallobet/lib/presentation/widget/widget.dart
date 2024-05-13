@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 Widget textFieldConsultation(String hint, TextEditingController controller){
   return TextField(        
-    keyboardType: TextInputType.number,       
+    keyboardType: TextInputType.number,  
+    controller: controller,     
     decoration: InputDecoration(
     hintText: hint,
     border: OutlineInputBorder(
@@ -53,5 +54,8 @@ AppBar appBarWidget(String title){
 }
 
 Widget titleConsultation(String title){
+  return Text(title, style: TextStyle(fontSize: 18));
+}
+Widget textfieldNumber(String title, TextEditingController controller){
   return Text(title, style: TextStyle(fontSize: 18));
 }
