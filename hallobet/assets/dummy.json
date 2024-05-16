@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "title": "Apa Itu Obesitas?",
+      "description": "Obesitas adalah kondisi medis di mana seseorang memiliki lemak tubuh berlebih yang dapat berdampak negatif pada kesehatan mereka.",
+      "image": "https://example.com/image1.jpg"
+    },
+    {
+      "title": "Penyebab Obesitas",
+      "description": "Obesitas bisa disebabkan oleh pola makan yang tidak sehat, kurangnya aktivitas fisik, faktor genetik, dan masalah hormonal.",
+      "image": "https://example.com/image2.jpg"
+    },
+    {
+      "title": "Gejala Obesitas",
+      "description": "Gejala obesitas termasuk peningkatan berat badan yang tidak normal, kelelahan, dan sesak napas.",
+      "image": "https://example.com/image3.jpg"
+    },
+    {
+      "title": "Dampak Kesehatan Obesitas",
+      "description": "Obesitas dapat meningkatkan risiko penyakit jantung, diabetes tipe 2, tekanan darah tinggi, dan berbagai kondisi kesehatan lainnya.",
+      "image": "https://example.com/image4.jpg"
+    },
+    {
+      "title": "Cara Mengatasi Obesitas",
+      "description": "Mengatasi obesitas bisa melalui perubahan gaya hidup seperti diet sehat, peningkatan aktivitas fisik, dan konsultasi dengan profesional kesehatan.",
+      "image": "https://example.com/image5.jpg"
+    },
+    {
+      "title": "Diet Sehat untuk Obesitas",
+      "description": "Diet sehat untuk obesitas mencakup konsumsi buah-buahan, sayuran, biji-bijian, dan protein tanpa lemak.",
+      "image": "https://example.com/image6.jpg"
+    },
+    {
+      "title": "Pentingnya Aktivitas Fisik",
+      "description": "Aktivitas fisik rutin dapat membantu mengurangi berat badan dan meningkatkan kesehatan secara keseluruhan.",
+      "image": "https://example.com/image7.jpg"
+    },
+    {
+      "title": "Peran Genetik dalam Obesitas",
+      "description": "Faktor genetik dapat mempengaruhi bagaimana tubuh menyimpan dan mendistribusikan lemak, yang bisa meningkatkan risiko obesitas.",
+      "image": "https://example.com/image8.jpg"
+    },
+    {
+      "title": "Obesitas pada Anak-Anak",
+      "description": "Obesitas pada anak-anak menjadi masalah yang semakin meningkat dan dapat mempengaruhi kesehatan fisik dan mental mereka.",
+      "image": "https://example.com/image9.jpg"
+    },
+    {
+      "title": "Mitos dan Fakta Tentang Obesitas",
+      "description": "Ada banyak mitos tentang obesitas yang beredar, penting untuk mengetahui fakta sebenarnya agar bisa mengambil langkah yang tepat.",
+      "image": "https://example.com/image10.jpg"
+    }
+  ]
+}
+  
