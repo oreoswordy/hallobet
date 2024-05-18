@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hallobet/presentation/widget/widget.dart';
+import 'package:hallobet/view/widget/widget.dart';
 
 const List<String> genders = ["Laki-Laki", "Perempuan"];
 const List<String> options = ["Ya", "Tidak"];

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hallobet/presentation/widget/widget.dart';
+import 'package:hallobet/view/widget/widget.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
