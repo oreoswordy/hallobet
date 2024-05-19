@@ -5,8 +5,13 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => InformationViewModel()..initialize(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) => CsvViewModel()..initialize()),
+        ChangeNotifierProvider(
+            create: (context) => InformationViewModel()..initialize()),
+      ],
       child: const MainApp(),
     ),
   );

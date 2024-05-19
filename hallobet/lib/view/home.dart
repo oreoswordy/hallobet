@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hallobet/view/detail_information.dart';
 import 'package:provider/provider.dart';
 import 'package:hallobet/view/about.dart';
 import 'package:hallobet/view/consultation.dart';
@@ -44,56 +45,69 @@ class HomeScreen extends StatelessWidget {
                     items: viewModel.items.map((item) {
                       return Builder(
                         builder: (BuildContext context) {
-                          return Container(
-                            margin: const EdgeInsets.only(right: 12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.2,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                    ),
-                                    image: const DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          "https://media.istockphoto.com/id/1314797892/id/foto/obesitas-berat-badan-tidak-sehat-ahli-gizi-memeriksa-pinggang-wanita-menggunakan-pita-meter.jpg?s=612x612&w=0&k=20&c=ydZ4-lwelbRe7twM2KOyIa_qnSf85kiSrQ5Z53dLfYI="), // Use data from JSON
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailInformation(
+                                        title: item.title,
+                                        image:
+                                            "https://media.istockphoto.com/id/1314797892/id/foto/obesitas-berat-badan-tidak-sehat-ahli-gizi-memeriksa-pinggang-wanita-menggunakan-pita-meter.jpg?s=612x612&w=0&k=20&c=ydZ4-lwelbRe7twM2KOyIa_qnSf85kiSrQ5Z53dLfYI=",
+                                        desc: item.description),
+                                  ));
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(right: 12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.2,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
+                                      ),
+                                      image: const DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            "https://media.istockphoto.com/id/1314797892/id/foto/obesitas-berat-badan-tidak-sehat-ahli-gizi-memeriksa-pinggang-wanita-menggunakan-pita-meter.jpg?s=612x612&w=0&k=20&c=ydZ4-lwelbRe7twM2KOyIa_qnSf85kiSrQ5Z53dLfYI="), // Use data from JSON
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 6),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        item.title, // Use data from JSON
-                                        style: GoogleFonts.montserrat(
-                                          fontWeight: FontWeight.bold,
+                                  Container(
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 6),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item.title, // Use data from JSON
+                                          style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 6),
-                                      Text(
-                                        item.description, // Use data from JSON
-                                        maxLines: 3,
-                                        softWrap: true,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.openSans(),
-                                      ),
-                                    ],
+                                        const SizedBox(height: 6),
+                                        Text(
+                                          item.description, // Use data from JSON
+                                          maxLines: 3,
+                                          softWrap: true,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.openSans(),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         },

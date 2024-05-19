@@ -13,48 +13,51 @@ Widget textFieldConsultation(String hint, TextEditingController controller) {
   );
 }
 
-Widget cardInformation(
+Widget cardInformation(Function()? func,
     BuildContext context, String image, String title, String desc) {
   return Container(
     margin: const EdgeInsets.all(12),
-    child: Card(
-      elevation: 0,
-      color: Colors.transparent,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.15,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(image),
+    child: GestureDetector(
+      onTap: func,
+      child: Card(
+        elevation: 0,
+        color: Colors.transparent,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.15,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(image),
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  desc,
-                  textAlign: TextAlign.justify,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    desc,
+                    textAlign: TextAlign.justify,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
