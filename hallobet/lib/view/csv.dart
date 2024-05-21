@@ -21,7 +21,7 @@ class CsvScreen extends StatelessWidget {
                 return ListTile(
                   title: Text('${obesity.genders}, Age: ${obesity.age}'),
                   subtitle: Text(
-                      'Weight: ${obesity.weight}, Height: ${obesity.height}'),
+                      'Weight: ${obesity.weight}, Height: ${obesity.height}, Family history of overweight: ${obesity.familyHistoryWithOverweight}'),
                 );
               },
             );

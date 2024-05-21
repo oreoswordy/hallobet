@@ -28,15 +28,10 @@ class InformationScreen extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => DetailInformation(
                                 title: item.title,
-                                image:
-                                    "https://media.istockphoto.com/id/1314797892/id/foto/obesitas-berat-badan-tidak-sehat-ahli-gizi-memeriksa-pinggang-wanita-menggunakan-pita-meter.jpg?s=612x612&w=0&k=20&c=ydZ4-lwelbRe7twM2KOyIa_qnSf85kiSrQ5Z53dLfYI=",
+                                image: item.image,
                                 desc: item.description),
                           ));
-                    },
-                        context,
-                        "https://media.istockphoto.com/id/1314797892/id/foto/obesitas-berat-badan-tidak-sehat-ahli-gizi-memeriksa-pinggang-wanita-menggunakan-pita-meter.jpg?s=612x612&w=0&k=20&c=ydZ4-lwelbRe7twM2KOyIa_qnSf85kiSrQ5Z53dLfYI=",
-                        item.title,
-                        item.description);
+                    }, context, item.image, item.title, item.description);
                   },
                 );
               },

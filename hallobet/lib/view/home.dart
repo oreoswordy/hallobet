@@ -17,6 +17,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
         title: Column(
           children: [
             Text(
@@ -48,14 +51,15 @@ class HomeScreen extends StatelessWidget {
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailInformation(
-                                        title: item.title,
-                                        image:
-                                            "https://media.istockphoto.com/id/1314797892/id/foto/obesitas-berat-badan-tidak-sehat-ahli-gizi-memeriksa-pinggang-wanita-menggunakan-pita-meter.jpg?s=612x612&w=0&k=20&c=ydZ4-lwelbRe7twM2KOyIa_qnSf85kiSrQ5Z53dLfYI=",
-                                        desc: item.description),
-                                  ));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailInformation(
+                                    title: item.title,
+                                    image: item.image,
+                                    desc: item.description,
+                                  ),
+                                ),
+                              );
                             },
                             child: Container(
                               margin: const EdgeInsets.only(right: 12),
@@ -75,10 +79,11 @@ class HomeScreen extends StatelessWidget {
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10),
                                       ),
-                                      image: const DecorationImage(
+                                      image: DecorationImage(
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
-                                            "https://media.istockphoto.com/id/1314797892/id/foto/obesitas-berat-badan-tidak-sehat-ahli-gizi-memeriksa-pinggang-wanita-menggunakan-pita-meter.jpg?s=612x612&w=0&k=20&c=ydZ4-lwelbRe7twM2KOyIa_qnSf85kiSrQ5Z53dLfYI="), // Use data from JSON
+                                          item.image,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -90,18 +95,23 @@ class HomeScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          item.title, // Use data from JSON
+                                          item.title,
                                           style: GoogleFonts.montserrat(
                                             fontWeight: FontWeight.bold,
+                                            fontSize: 18,
                                           ),
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 6),
                                         Text(
-                                          item.description, // Use data from JSON
+                                          item.description,
                                           maxLines: 3,
                                           softWrap: true,
                                           overflow: TextOverflow.ellipsis,
-                                          style: GoogleFonts.openSans(),
+                                          style: GoogleFonts.openSans(
+                                            fontSize: 16,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -117,13 +127,12 @@ class HomeScreen extends StatelessWidget {
                       enableInfiniteScroll: false,
                       autoPlayAnimationDuration: const Duration(seconds: 2),
                       autoPlay: true,
-                      aspectRatio: 1.5,
+                      aspectRatio: 1.25,
                       viewportFraction: 0.9,
                     ),
                   );
                 },
               ),
-              const SizedBox(height: 12),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(

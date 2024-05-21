@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget textFieldConsultation(String hint, TextEditingController controller) {
   return TextField(
@@ -13,8 +14,8 @@ Widget textFieldConsultation(String hint, TextEditingController controller) {
   );
 }
 
-Widget cardInformation(Function()? func,
-    BuildContext context, String image, String title, String desc) {
+Widget cardInformation(Function()? func, BuildContext context, String image,
+    String title, String desc) {
   return Container(
     margin: const EdgeInsets.all(12),
     child: GestureDetector(
@@ -26,7 +27,7 @@ Widget cardInformation(Function()? func,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.15,
+              height: MediaQuery.of(context).size.height * 0.3,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.amber,
@@ -44,7 +45,10 @@ Widget cardInformation(Function()? func,
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Text(
@@ -52,6 +56,9 @@ Widget cardInformation(Function()? func,
                     textAlign: TextAlign.justify,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.openSans(
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
@@ -65,11 +72,12 @@ Widget cardInformation(Function()? func,
 
 AppBar appBarWidget(String title) {
   return AppBar(
-    backgroundColor: const Color(0xff874CCC),
+    elevation: 0,
+    backgroundColor: Colors.white,
+    scrolledUnderElevation: 0,
     centerTitle: true,
     title: Text(
       title,
-      style: const TextStyle(color: Colors.white),
     ),
   );
 }

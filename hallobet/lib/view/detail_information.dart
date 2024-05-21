@@ -31,7 +31,7 @@ class DetailInformation extends StatelessWidget {
                   fontSize: 24,
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Container(
                 height: MediaQuery.of(context).size.height * 0.3,
                 width: double.infinity,
@@ -40,20 +40,19 @@ class DetailInformation extends StatelessWidget {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(10),
                   ),
-                  image: const DecorationImage(
+                  image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        "https://media.istockphoto.com/id/1314797892/id/foto/obesitas-berat-badan-tidak-sehat-ahli-gizi-memeriksa-pinggang-wanita-menggunakan-pita-meter.jpg?s=612x612&w=0&k=20&c=ydZ4-lwelbRe7twM2KOyIa_qnSf85kiSrQ5Z53dLfYI="),
+                    image: NetworkImage(image),
                   ),
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Text(
                 """
                 $desc
                 """,
                 style: GoogleFonts.openSans(
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
                 textAlign: TextAlign.justify,
               ),
