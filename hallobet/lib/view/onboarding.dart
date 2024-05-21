@@ -8,7 +8,6 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool wasOnBoarding = true;
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
