@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hallobet/view/widget/widget.dart';
 
 class DetailInformation extends StatelessWidget {
   String title;
@@ -15,9 +16,7 @@ class DetailInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("OBESTIE"),
-      ),
+      appBar: appBarWidget(""),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),

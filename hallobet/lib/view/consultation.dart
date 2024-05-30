@@ -1,466 +1,307 @@
 import 'package:flutter/material.dart';
+import 'package:hallobet/model/consultation.dart';
 import 'package:hallobet/view/widget/widget.dart';
+import 'package:hallobet/view_model/consultation_view_model.dart';
+import 'package:provider/provider.dart';
 
-const List<String> genders = ["Laki-Laki", "Perempuan"];
-const List<String> options = ["Ya", "Tidak"];
-const List<String> options2 = ["Tidak", "Kadang - Kadang", "Sering", "Selalu"];
-
-enum MakananCategory {
-  choiceTidak,
-  choiceKadangKadang,
-  choiceSering,
-  choiceSelalu,
-}
-
-extension MakananCategoryExtension on MakananCategory {
-  String get label {
-    switch (this) {
-      case MakananCategory.choiceTidak:
-        return 'Tidak';
-      case MakananCategory.choiceKadangKadang:
-        return 'Kadang-Kadang';
-      case MakananCategory.choiceSering:
-        return 'Sering';
-      case MakananCategory.choiceSelalu:
-        return 'Selalu';
-    }
-  }
-}
-
-enum OptionCategory {
-  choiceYa,
-  choiceTidak,
-}
-
-extension OptionCategoryExtension on OptionCategory {
-  String get label {
-    switch (this) {
-      case OptionCategory.choiceYa:
-        return 'Ya';
-      case OptionCategory.choiceTidak:
-        return 'Tidak';
-    }
-  }
-}
-
-enum GenderCategory {
-  choiceLakiLaki,
-  choicePerempuan,
-}
-
-extension GenderCategoryExtension on GenderCategory {
-  String get label {
-    switch (this) {
-      case GenderCategory.choiceLakiLaki:
-        return 'Laki-Laki';
-      case GenderCategory.choicePerempuan:
-        return 'Perempuan';
-    }
-  }
-}
-
-enum ScaleCategory {
-  choiceKadangKadang,
-  choiceSering,
-  choiceSelalu,
-}
-
-extension ScaleCategoryExtension on ScaleCategory {
-  String get label {
-    switch (this) {
-      case ScaleCategory.choiceKadangKadang:
-        return 'Kadang - Kadang';
-      case ScaleCategory.choiceSering:
-        return 'Sering';
-      case ScaleCategory.choiceSelalu:
-        return 'Selalu';
-    }
-  }
-}
-
-enum AlcoholCategory {
-  choiceTidak,
-  choiceKadangKadang,
-  choiceSering,
-}
-
-extension AlcoholCategoryExtension on AlcoholCategory {
-  String get label {
-    switch (this) {
-      case AlcoholCategory.choiceTidak:
-        return 'Tidak';
-      case AlcoholCategory.choiceKadangKadang:
-        return 'Kadang - Kadang';
-      case AlcoholCategory.choiceSering:
-        return 'Sering';
-    }
-  }
-}
-
-enum TransportationCategory {
-  choiceJalan,
-  choiceUmum,
-  choiceMobil,
-}
-
-extension TransportationCategoryExtension on TransportationCategory {
-  String get label {
-    switch (this) {
-      case TransportationCategory.choiceJalan:
-        return 'Jalan';
-      case TransportationCategory.choiceUmum:
-        return 'Transportasi Umum';
-      case TransportationCategory.choiceMobil:
-        return 'Mobil';
-    }
-  }
-}
-
-class ConsultationScreen extends StatefulWidget {
-  const ConsultationScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ConsultationScreen> createState() => _ConsultationScreenState();
-}
-
-class _ConsultationScreenState extends State<ConsultationScreen> {
-  TextEditingController jenisKelaminController = TextEditingController();
-  TextEditingController usiaController = TextEditingController();
-  TextEditingController height = TextEditingController();
-  TextEditingController weight = TextEditingController();
-
-  GenderCategory? selectedGender;
-  OptionCategory? selectedOption1;
-  OptionCategory? selectedOption;
-  MakananCategory? selectedMakanan;
-  MakananCategory? selectedMakanan1;
-  MakananCategory? selectedMakanan2;
-  OptionCategory? selectedOption2;
-  OptionCategory? selectedOption3;
-  MakananCategory? selectedMakanan3;
-  ScaleCategory? selectedScale;
-  AlcoholCategory? selectedAlcohol;
-  AlcoholCategory? selectedAlcohol1;
-  TransportationCategory? selectedTransportation;
+class ConsultationScreen extends StatelessWidget {
+  const ConsultationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBarWidget("Konsultasi Tingkat Obesitas"),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              titleConsultation("Jenis Kelamin"),
-              SizedBox(height: 12),
-              DropdownButton<GenderCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedGender,
-                onChanged: (newValue) {
-                  setState(() {
-                    jenisKelaminController.text = newValue!.label;
-                    selectedGender = newValue;
-                  });
-                },
-                items: GenderCategory.values.map((choice) {
-                  return DropdownMenuItem<GenderCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Usia"),
-              SizedBox(height: 12),
-              textFieldConsultation("Masukkan Usia", usiaController),
-              SizedBox(height: 24),
-              titleConsultation("Tinggi Badan"),
-              SizedBox(height: 12),
-              textFieldConsultation("Masukkan Tinggi Badan", height),
-              SizedBox(height: 24),
-              titleConsultation("Berat Badan"),
-              SizedBox(height: 12),
-              textFieldConsultation("Masukkan Berat Badan", weight),
-              SizedBox(height: 24),
-              titleConsultation("Apakah Anda memiliki riwayat keturunan obesitas ?"),
-              SizedBox(height: 12),
-              DropdownButton<OptionCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedOption1,
-                onChanged: (newValue1) {
-                  setState(() {
-                    selectedOption1 = newValue1!;
-                  });
-                },
-                items: OptionCategory.values.map((choice) {
-                  return DropdownMenuItem<OptionCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Apakah Anda mengonsumsi makanan tinggi kalori ?"),
-              SizedBox(height: 12),
-              DropdownButton<OptionCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedOption,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedOption = newValue!;
-                  });
-                },
-                items: OptionCategory.values.map((choice) {
-                  return DropdownMenuItem<OptionCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24,),
-              titleConsultation("Seberapa sering Anda mengonsumsi Sayuran ?"),
-              SizedBox(height: 12,),
-              DropdownButton<MakananCategory>(
-                hint: Text('Pilih'),
-                isExpanded: true,
-                value: selectedMakanan,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedMakanan = newValue!;
-                  });
-                },
-                items: MakananCategory.values.map((choice) {
-                  return DropdownMenuItem<MakananCategory>(
-                    value: choice,
-                    child:
-                    Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24,),
-              titleConsultation("Seberapa sering anda mengonsumsi makanan dalam sehari ?"),
-              SizedBox(height: 12,),
-              DropdownButton<MakananCategory>(
-                hint: Text('Pilih'),
-                isExpanded: true,
-                value: selectedMakanan1,
-                onChanged: (newValue1) {
-                  setState(() {
-                    selectedMakanan1 = newValue1!;
-                  });
-                },
-                items: MakananCategory.values.map((choice) {
-                  return DropdownMenuItem<MakananCategory>(
-                    value: choice,
-                    child:
-                    Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Apakah Anda mengonsumsi cemilan ?"),
-              SizedBox(height: 12),
-              DropdownButton<MakananCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedMakanan2,
-                onChanged: (newValue2) {
-                  setState(() {
-                    selectedMakanan2 = newValue2!;
-                  });
-                },
-                items: MakananCategory.values.map((choice) {
-                  return DropdownMenuItem<MakananCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Apakah Anda merokok ?"),
-              SizedBox(height: 12),
-              DropdownButton<OptionCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedOption2,
-                onChanged: (newValue2) {
-                  setState(() {
-                    selectedOption2 = newValue2!;
-                  });
-                },
-                items: OptionCategory.values.map((choice) {
-                  return DropdownMenuItem<OptionCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Seberapa sering Anda minum air putih ?"),
-              SizedBox(height: 12),
-              DropdownButton<ScaleCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedScale,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedScale = newValue!;
-                  });
-                },
-                items: ScaleCategory.values.map((choice) {
-                  return DropdownMenuItem<ScaleCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Apakah Anda menghitung kalori yang masuk ke dalam tubuh Anda ?"),
-              SizedBox(height: 12),
-              DropdownButton<OptionCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedOption3,
-                onChanged: (newValue3) {
-                  setState(() {
-                    selectedOption3 = newValue3!;
-                  });
-                },
-                items: OptionCategory.values.map((choice) {
-                  return DropdownMenuItem<OptionCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Seberapa sering Anda melakukan aktivitas fisik ?"),
-              SizedBox(height: 12),
-              DropdownButton<MakananCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedMakanan3,
-                onChanged: (newValue3) {
-                  setState(() {
-                    selectedMakanan3 = newValue3!;
-                  });
-                },
-                items: MakananCategory.values.map((choice) {
-                  return DropdownMenuItem<MakananCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Seberapa sering Anda menggunakan teknologi ?"),
-              SizedBox(height: 12),
-              DropdownButton<AlcoholCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedAlcohol,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedAlcohol = newValue!;
-                  });
-                },
-                items: AlcoholCategory.values.map((choice) {
-                  return DropdownMenuItem<AlcoholCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Seberapa sering Anda mengonsumsi alkohol ?"),
-              SizedBox(height: 12),
-              DropdownButton<AlcoholCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedAlcohol1,
-                onChanged: (newValue1) {
-                  setState(() {
-                    selectedAlcohol1 = newValue1!;
-                  });
-                },
-                items: AlcoholCategory.values.map((choice) {
-                  return DropdownMenuItem<AlcoholCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              titleConsultation("Transportasi apa yang Anda gunakan sehari - hari ?"),
-              SizedBox(height: 12),
-              DropdownButton<TransportationCategory>(
-                hint: Text("Pilih"),
-                isExpanded: true,
-                value: selectedTransportation,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedTransportation = newValue!;
-                  });
-                },
-                items: TransportationCategory.values.map((choice) {
-                  return DropdownMenuItem<TransportationCategory>(
-                    value: choice,
-                    child: Text(choice.label),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 24),
-              Container(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+    return ChangeNotifierProvider(
+      create: (context) => ConsultationViewModel(),
+      child: Scaffold(
+        appBar: appBarWidget("Konsultasi Tingkat Obesitas"),
+        body: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(12),
+            child: Consumer<ConsultationViewModel>(
+              builder: (context, model, child) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    titleConsultation("Jenis Kelamin"),
+                    const SizedBox(height: 12),
+                    DropdownButton(
+                      hint: const Text("Pilih"),
+                      isExpanded: true,
+                      value: model.selectedGender,
+                      onChanged: model.setGender,
+                      items: model.genderItems,
                     ),
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text('Hasil'),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Jenis Kelamin: ${jenisKelaminController.text}'),
-                              Text('Usia: ${usiaController.text}'),
-                              Text('Tinggi Badan: ${height.text}'),
-                              Text('Berat Badan: ${weight.text}'),
-                              Text('Riwayat Obesitas: ${selectedOption1?.label ?? "Belum dipilih"}'),
-                              Text('Konsumsi Makanan Tinggi Kalori: ${selectedOption?.label ?? "Belum dipilih"}'),
-                              Text('Konsumsi Sayuran: ${selectedMakanan?.label ?? "Belum dipilih"}'),
-                              Text('Konsumsi Makanan dalam Sehari: ${selectedMakanan1?.label ?? "Belum dipilih"}'),
-                              // Add more fields here as needed
-                            ],
+                    const SizedBox(height: 24),
+                    titleConsultation("Usia"),
+                    const SizedBox(height: 12),
+                    textFieldConsultation(
+                        "Masukkan Usia", model.usiaController),
+                    const SizedBox(height: 24),
+                    titleConsultation("Tinggi Badan"),
+                    const SizedBox(height: 12),
+                    textFieldConsultation(
+                        "Masukkan Tinggi Badan", model.heightController),
+                    const SizedBox(height: 24),
+                    titleConsultation("Berat Badan"),
+                    const SizedBox(height: 12),
+                    textFieldConsultation(
+                        "Masukkan Berat Badan", model.weightController),
+                    const SizedBox(height: 24),
+                    titleConsultation(
+                        "Apakah Anda memiliki riwayat keturunan obesitas ?"),
+                    const SizedBox(height: 12),
+                    DropdownButton(
+                      hint: const Text("Pilih"),
+                      isExpanded: true,
+                      value: model.selectedObecity,
+                      onChanged: model.setObecity,
+                      items: model.yesnoItems,
+                    ),
+                    const SizedBox(height: 24),
+                    titleConsultation(
+                        "Apakah Anda mengonsumsi makanan tinggi kalori ?"),
+                    const SizedBox(height: 12),
+                    DropdownButton(
+                      hint: const Text("Pilih"),
+                      isExpanded: true,
+                      value: model.selectedCalories,
+                      onChanged: model.setCalories,
+                      items: model.yesnoItems,
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    titleConsultation(
+                        "Seberapa sering Anda mengonsumsi Sayuran ?"),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: DropdownButton(
+                            hint: const Text('Pilih'),
+                            isExpanded: true,
+                            value: model.selectedVegetable,
+                            onChanged: model.setVegetable,
+                            items: model.numberPickOptionItems,
                           ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('Selesai'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                  child: Text("Submit"),
-                ),
-              ),
-            ],
+                        ),
+                        const SizedBox(width: 24),
+                        tagText("kali per minggu"),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    titleConsultation(
+                        "Seberapa sering anda mengonsumsi makanan dalam sehari ?"),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: DropdownButton(
+                            hint: const Text('Pilih'),
+                            isExpanded: true,
+                            value: model.selectedEat,
+                            items: model.numberPickOptionItems,
+                            onChanged: model.setEat,
+                          ),
+                        ),
+                        const SizedBox(width: 24),
+                        tagText("per hari"),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    titleConsultation("Apakah Anda mengonsumsi cemilan ?"),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: DropdownButton(
+                            hint: const Text("Pilih"),
+                            isExpanded: true,
+                            value: model.selectedSnack,
+                            items: model.numberPickOptionItems,
+                            onChanged: model.setSnack,
+                          ),
+                        ),
+                        const SizedBox(width: 24),
+                        tagText("per hari"),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    titleConsultation("Apakah Anda merokok ?"),
+                    const SizedBox(height: 12),
+                    DropdownButton(
+                      hint: const Text("Pilih"),
+                      isExpanded: true,
+                      value: model.selectedCigarette,
+                      onChanged: model.setCigarette,
+                      items: model.yesnoItems,
+                    ),
+                    const SizedBox(height: 24),
+                    titleConsultation("Seberapa sering Anda minum air putih ?"),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: DropdownButton(
+                            hint: const Text("Pilih"),
+                            isExpanded: true,
+                            value: model.selectedDrink,
+                            onChanged: model.setDrink,
+                            items: model.numberPickOptionItems,
+                          ),
+                        ),
+                        const SizedBox(width: 24),
+                        tagText("liter per hari"),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    titleConsultation(
+                        "Apakah Anda menghitung kalori yang masuk ke dalam tubuh Anda ?"),
+                    const SizedBox(height: 12),
+                    DropdownButton(
+                      hint: const Text("Pilih"),
+                      isExpanded: true,
+                      value: model.selectedCountingCalories,
+                      onChanged: model.setCountingCalories,
+                      items: model.yesnoItems,
+                    ),
+                    const SizedBox(height: 24),
+                    titleConsultation(
+                        "Seberapa sering Anda melakukan aktivitas fisik ?"),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: DropdownButton(
+                            hint: const Text("Pilih"),
+                            isExpanded: true,
+                            value: model.selectedActivity,
+                            onChanged: model.setActivity,
+                            items: model.numberPickOptionItems,
+                          ),
+                        ),
+                        const SizedBox(width: 24),
+                        tagText("kali per minggu"),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    titleConsultation(
+                        "Seberapa sering Anda menggunakan teknologi ?"),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: DropdownButton(
+                            hint: const Text("Pilih"),
+                            isExpanded: true,
+                            value: model.selectedUseTech,
+                            onChanged: model.setUseTech,
+                            items: model.numberPickOptionItems,
+                          ),
+                        ),
+                        const SizedBox(width: 24),
+                        tagText("jam per hari"),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    titleConsultation(
+                        "Seberapa sering Anda mengonsumsi alkohol ?"),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: DropdownButton(
+                            hint: const Text("Pilih"),
+                            isExpanded: true,
+                            value: model.selectedAlcohol,
+                            items: model.numberPickOptionItems,
+                            onChanged: model.setAlcohol,
+                          ),
+                        ),
+                        const SizedBox(width: 24),
+                        tagText("per minggu"),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    titleConsultation(
+                        "Transportasi apa yang Anda gunakan sehari - hari ?"),
+                    const SizedBox(height: 12),
+                    DropdownButton(
+                      hint: const Text("Pilih"),
+                      isExpanded: true,
+                      value: model.selectedTransportation,
+                      onChanged: model.setTransportation,
+                      items: model.transportationItems,
+                    ),
+                    const SizedBox(height: 24),
+                    Container(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onPressed: () {
+                          model.submit();
+                          // model.predictObesityResult();
+                          // model.predictObesity(
+                          //   gender: model.jenisKelaminController.text,
+                          //   age: double.tryParse(model.usiaController.text) ??
+                          //       0.0,
+                          //   height:
+                          //       double.tryParse(model.heightController.text) ??
+                          //           0.0,
+                          //   weight:
+                          //       double.tryParse(model.weightController.text) ??
+                          //           0.0,
+                          //   familyHistoryWithOverweight:
+                          //       model.selectedObecity?.label ?? '',
+                          //   favc: model.selectedCalories?.label ?? '',
+                          //   fcvc: int.tryParse(
+                          //           model.selectedVegetable?.label ?? "") ??
+                          //       0,
+                          //   ncp: double.tryParse(
+                          //           model.selectedNumberFrequenceEat?.label ??
+                          //               "") ??
+                          //       0.0,
+                          //   caec: model.selectedSnack?.label ?? '',
+                          //   smoke: model.selectedCigarette?.label ?? "",
+                          //   ch2o: double.parse(
+                          //       model.selectedNumberFrequenceDrink?.label ??
+                          //           ""),
+                          //   scc: model.selectedCountingCalories?.label ?? "",
+                          //   faf: double.parse(
+                          //       model.selectedNumberFrequenceActivity?.label ??
+                          //           ""),
+                          //   tue: double.parse(
+                          //       model.selectedNumberFrequenceUseTech?.label ??
+                          //           ""),
+                          //   calc: model.selectedAlcohol?.label ?? "",
+                          //   mtrans: model.selectedTransportation?.label ?? "",
+                          // );
+                        },
+                        child: const Text("Submit"),
+                      ),
+                    ),
+                    Text(model.predictionResult),
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

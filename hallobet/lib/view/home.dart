@@ -2,13 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hallobet/view/detail_information.dart';
+import 'package:hallobet/view_model/information_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:hallobet/view/about.dart';
 import 'package:hallobet/view/consultation.dart';
 import 'package:hallobet/view/csv.dart';
 import 'package:hallobet/view/information.dart';
 import 'package:hallobet/view/widget/widget.dart';
-import 'package:hallobet/view_model/view_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -79,11 +79,20 @@ class HomeScreen extends StatelessWidget {
                                         topLeft: Radius.circular(10),
                                         topRight: Radius.circular(10),
                                       ),
-                                      image: DecorationImage(
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
+                                      ),
+                                      child: Image.network(
+                                        item.image,
                                         fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                          item.image,
-                                        ),
+                                        errorBuilder: (BuildContext context,
+                                            Object exception,
+                                            StackTrace? stackTrace) {
+                                          return imageError();
+                                        },
                                       ),
                                     ),
                                   ),

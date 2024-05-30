@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hallobet/view/detail_information.dart';
-import 'package:hallobet/view_model/view_model.dart';
+import 'package:hallobet/view_model/information_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:hallobet/view/widget/widget.dart';
 

@@ -75,7 +75,6 @@ AppBar appBarWidget(String title) {
     elevation: 0,
     backgroundColor: Colors.white,
     scrolledUnderElevation: 0,
-    centerTitle: true,
     title: Text(
       title,
     ),
@@ -157,5 +156,27 @@ Widget cardInfromation(
         ],
       ),
     ),
+  );
+}
+
+Widget imageError() {
+  return Container(
+    color: Colors.grey[300],
+    child: const Center(
+      child: Text(
+        "Gambar Tidak Tersedia",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  );
+}
+
+Widget tagText(String tag) {
+  return Text(
+    tag,
+    style: TextStyle(fontSize: 16, color: Colors.grey),
   );
 }

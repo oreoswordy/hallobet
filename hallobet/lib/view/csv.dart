@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hallobet/view_model/view_model.dart';
+import 'package:hallobet/view_model/csv_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CsvScreen extends StatelessWidget {
