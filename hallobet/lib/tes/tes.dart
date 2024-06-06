@@ -42,7 +42,7 @@ class _ObesityFormState extends State<ObesityForm> {
     // Convert to DataFrame
     final header = csvTable[0].map((e) => e.toString()).toList();
     final data = csvTable.sublist(1);
-    final df = DataFrame.fromMatrix(data, header);
+    final df = DataFrame.fromMatrix(data, header: header);
 
     // Scale the data (StandardScaler equivalent)
     final scaler = StandardScaler();
