@@ -49,7 +49,7 @@ class _ObesityFormState extends State<ObesityForm> {
     final scaledData = scaler.fitTransform(df);
 
     // Define the input feature names and target name
-    final featureNames = ['Gender', 'Age', 'Height', 'Weight', 'FamilyHistory', 'FSM', 'CalCons', 'Smk', 'Hrs'];
+    final featureNames = ['Gender','Age','Height','Weight','family_history_with_overweight','FAVC','FCVC','NCP','CAEC','SMOKE','CH2O','SCC','FAF','TUE','CALC','MTRANS','NObeyesdad'];
     final targetName = 'NObeyesdad';
 
     // Prepare the input data
