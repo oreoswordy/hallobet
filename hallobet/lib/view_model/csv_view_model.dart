@@ -34,26 +34,28 @@ class CsvViewModel extends ChangeNotifier {
       }
     }
 
-    // print(catCols);
-    // print(numCols);
+    print(catCols);
+    print(numCols);
 
     List<List<dynamic>> transformedData = preprocessData(_listData);
-    // log(transformedData.toString());
+    log(transformedData.toString());
 
     final samplesTransformed = DataFrame(transformedData, headerExists: true);
 
-    // _classifier = KnnClassifier(
-    //   samplesTransformed,
-    //   targetName,
-    //   3,
-    //   distance: Distance.euclidean,
-    // );
+    _classifier = KnnClassifier(
+      samplesTransformed,
+      targetName,
+      3,
+      distance: Distance.euclidean,
+    );
 
     // Skip header row and convert each data row to an Obesity instance
     _data = _listData.skip(1).map((row) => Obesity.fromList(row)).toList();
 
     notifyListeners();
   }
+
+  
 
   List<List<dynamic>> preprocessData(List<List<dynamic>> data) {
     List<dynamic> header = data.first;

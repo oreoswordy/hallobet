@@ -21,25 +21,25 @@
 //     );
 //   }
 
-//   String predict(Obesity obesity) {
-//     final features = DataFrame.fromSeries([
-//       Series('genders', [obesity.genders]),
-//       Series('age', [obesity.age]),
-//       Series('height', [obesity.height]),
-//       Series('weight', [obesity.weight]),
-//       Series('familyHistoryWithOverweight', [obesity.familyHistoryWithOverweight]),
-//       Series('favc', [obesity.favc]),
-//       Series('fcvc', [obesity.fcvc]),
-//       Series('ncp', [obesity.ncp]),
-//       Series('caec', [obesity.caec]),
-//       Series('smoke', [obesity.smoke]),
-//       Series('ch2o', [obesity.ch2o]),
-//       Series('scc', [obesity.scc]),
-//       Series('faf', [obesity.faf]),
-//       Series('tue', [obesity.tue]),
-//       Series('calc', [obesity.calc]),
-//       // Add other fields as needed
-//     ]);
+  // String predict(Obesity obesity) {
+  //   final features = DataFrame.fromSeries([
+  //     Series('genders', [obesity.genders]),
+  //     Series('age', [obesity.age]),
+  //     Series('height', [obesity.height]),
+  //     Series('weight', [obesity.weight]),
+  //     Series('familyHistoryWithOverweight', [obesity.familyHistoryWithOverweight]),
+  //     Series('favc', [obesity.favc]),
+  //     Series('fcvc', [obesity.fcvc]),
+  //     Series('ncp', [obesity.ncp]),
+  //     Series('caec', [obesity.caec]),
+  //     Series('smoke', [obesity.smoke]),
+  //     Series('ch2o', [obesity.ch2o]),
+  //     Series('scc', [obesity.scc]),
+  //     Series('faf', [obesity.faf]),
+  //     Series('tue', [obesity.tue]),
+  //     Series('calc', [obesity.calc]),
+  //     // Add other fields as needed
+  //   ]);
 
 //     final predicted = _classifier.predict(features);
 

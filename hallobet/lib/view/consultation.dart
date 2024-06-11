@@ -258,6 +258,8 @@ class ConsultationScreen extends StatelessWidget {
                         onPressed: () {
                           model.submit();
                           // model.predictObesityResult();
+                          // model.predictObesityResult();
+                          // model.predictObesityResult();
                           // model.predictObesity(
                           //   gender: model.jenisKelaminController.text,
                           //   age: double.tryParse(model.usiaController.text) ??
@@ -297,13 +299,15 @@ class ConsultationScreen extends StatelessWidget {
                         child: const Text("Submit"),
                       ),
                     ),
-                    Text(model.predictionResult),
+                    Text('Prediction Result: ${model.predictionResult}'),
                   ],
                 );
               },
             ),
           ),
-        ),
+        ),floatingActionButton: FloatingActionButton(onPressed: () {
+          ConsultationViewModel().loadCSVData();
+        },),
       ),
     );
   }

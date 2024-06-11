@@ -1,11 +1,9 @@
-// ignore_for_file: avoid_print
-
-import 'dart:convert';
-import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hallobet/model/obesity.dart';
+import 'package:hallobet/view_model/csv_view_model.dart';
 import 'package:ml_algo/ml_algo.dart';
 import 'package:ml_dataframe/ml_dataframe.dart';
 import 'package:csv/csv.dart';
@@ -73,8 +71,30 @@ class ConsultationViewModel extends ChangeNotifier {
   String get predictionResult => _predictionResult;
 
   List<Obesity> dataset = [];
+  KnnClassifier? _classifier;
 
   int k = 5; // Nilai k untuk KNN
+  // Method to convert categorical values to numeric
+  double convertCategoricalValue(String category, Map<String, double> map) {
+    return map[category] ?? 0.0;
+  }
+
+  // Map categorical values to numbers
+  final Map<String, double> genderMap = {'Male': 1.0, 'Female': 0.0};
+  final Map<String, double> yesNoMap = {'Yes': 1.0, 'No': 0.0};
+  final Map<String, double> frequencyMap = {
+    'Never': 0.0,
+    'Sometimes': 1.0,
+    'Frequently': 2.0,
+    'Always': 3.0
+  };
+  final Map<String, double> transportationMap = {
+    'Walking': 0.0,
+    'Automobile': 1.0,
+    'Motorbike': 2.0,
+    'Public_Transportation': 3.0,
+    'Bike': 4.0
+  };
 
   List<DropdownMenuItem<OptionCategory>> get optionItems {
     return OptionCategory.values.map((choice) {
@@ -328,7 +348,24 @@ class ConsultationViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void submit() {
+  void submit() async {
+    final _rawData = await rootBundle.loadString("assets/obesity_dataset.csv");
+    List<List<dynamic>> _listData =
+        const CsvToListConverter().convert(_rawData);
+
+    final samples = DataFrame.fromRawCsv(_rawData, headerExists: true);
+    final targetName = 'NObeyesdad';
+
+    //  _classifier = KnnClassifier(
+    //   samples,
+    //   targetName,
+    //   k, // The number of nearest neighbours
+    //   distance: Distance.euclidean,);
+
+        print(samples);
+    print(samples.rows.length);
+
+
     print('Jenis Kelamin: ${selectedGender?.value ?? "belum diisi"}');
     print('Usia: ${usiaController.text}');
     print('Tinggi: ${heightController.text}');
@@ -347,22 +384,79 @@ class ConsultationViewModel extends ChangeNotifier {
         'Menggunakan Teknologi: ${selectedUseTech?.value ?? "belum dipilih"}');
     print('Alkohol: ${selectedAlcohol?.value ?? "belum dipilih"}');
     print('Transportasi: ${selectedTransportation?.value ?? "belum dipilih"}');
+
+
+    final features = DataFrame.fromSeries([
+  //     Series('gender', [convertCategoricalValue(selectedGender!.label, genderMap)]),
+  //     Series('age', [usiaController]),
+  //     Series('height', [heightController]),
+  //     Series('weight', [weightController]),
+  //     Series('familyHistoryWithOverweight', [convertCategoricalValue(selectedObecity!.label, yesNoMap)]),
+  //     Series('favc', [convertCategoricalValue(selectedCalories!.label, yesNoMap)]),
+  //     Series('fcvc', [convertCategoricalValue(selectedVegetable!.label, frequencyMap)]),
+  //     Series('ncp', [convertCategoricalValue(selectedEat!.label, frequencyMap)]),
+  //     Series('caec', [convertCategoricalValue(selectedSnack!.label, frequencyMap)]),
+  //     Series('smoke', [convertCategoricalValue(selectedCigarette!.label, yesNoMap)]),
+  //     Series('ch2o', [convertCategoricalValue(selectedDrink!.label, frequencyMap)]),
+  //     Series('scc', [convertCategoricalValue(selectedCountingCalories!.label, yesNoMap)]),
+  //     Series('faf', [convertCategoricalValue(selectedActivity!.label, frequencyMap)]),
+  //     Series('tue', [convertCategoricalValue(selectedUseTech!.label, frequencyMap)]),
+  //     Series('calc', [convertCategoricalValue(selectedAlcohol!.label, frequencyMap)]),
+  //     Series('mtrans', [convertCategoricalValue(selectedTransportation!.label, transportationMap)]),
+
+      Series('genders', [selectedGender?.value]),
+      Series('age', [usiaController.text]),
+      Series('height', [heightController.text]),
+      Series('weight', [weightController.text]),
+      Series('familyHistoryWithOverweight', [selectedObecity?.value]),
+      Series('favc', [selectedCalories?.value]),
+      Series('fcvc', [selectedVegetable?.value]),
+      Series('ncp', [selectedEat?.value]),
+      Series('caec', [selectedSnack?.value]),
+      Series('smoke', [selectedCigarette?.value]),
+      Series('ch2o', [selectedDrink?.value]),
+      Series('scc', [selectedCountingCalories?.value]),
+      Series('faf', [selectedActivity?.value]),
+      Series('tue', [selectedUseTech?.value]),
+      Series('calc', [selectedAlcohol?.value]),
+      Series('mtrans', [selectedTransportation?.value]),
+      // Add other fields as needed
+    ]);
+
+     // Perform prediction
+    final prediction = _classifier?.predict(features).toMatrix();
+    _predictionResult = prediction?[0][0]?.toString() ?? 'Unknown';
+
+    notifyListeners();
+
+    print('tes = ${features.series}');
+        
+  //   KnnClassifier? _classifier;
+  //Sumber Error
+
+    // _classifier = KnnClassifier(
+    //   samples,
+    //   targetName,
+    //   3, // The number of nearest neighbours
+    //   distance: Distance.euclidean,
+    // );
+
+  // final predict = _classifier?.predict(samples).toMatrix();
+
+  // predict?[0][0].toString();
   }
 
-  KnnClassifier? _classifier;
+  Future<void> loadCSVData() async {
+    final rawData = await rootBundle.loadString("assets/obesity_dataset.csv");
+    List<List<dynamic>> data = CsvToListConverter().convert(rawData);
 
-  List<Obesity> _data = [];
+    // final header = data.first;
+    final rows = data.sublist(1);
+    final samples = DataFrame(rows);
+    final targetName = 'NObeyesdad';
 
-  List<Obesity> get data => _data;
-
-  Future<void> loadModel() async {
-    final rawCsvContent =
-        await rootBundle.loadString("assets/obesity_dataset.csv");
-    List<List<dynamic>> rawData =
-        const CsvToListConverter().convert(rawCsvContent);
-    // final samples = DataFrame(rawData, headerExists: true);
-    final samples = DataFrame.fromRawCsv(rawCsvContent, headerExists: true);
-    final targetName = 'NObeyesdad'; // The name of the target column
+    print(samples);
+    print(samples.rows.length);
 
     _classifier = KnnClassifier(
       samples,
@@ -370,6 +464,10 @@ class ConsultationViewModel extends ChangeNotifier {
       3, // The number of nearest neighbours
       distance: Distance.euclidean,
     );
+
+     final predict = _classifier!.predict(samples).toMatrix();
+
+  predict[0][0].toString();
   }
 
   String predictObesity({
@@ -393,73 +491,53 @@ class ConsultationViewModel extends ChangeNotifier {
     if (_classifier == null) {
       return 'Unknown';
     }
-    // final features = DataFrame([
-    //   [
-    //     gender,
-    //     age,
-    //     height,
-    //     weight,
-    //     familyHistoryWithOverweight,
-    //     favc,
-    //     fcvc,
-    //     ncp,
-    //     caec,
-    //     smoke,
-    //     ch2o,
-    //     scc,
-    //     faf,
-    //     tue,
-    //     calc,
-    //     mtrans,
-    //   ]
-    // ], headerExists: false);
+  
+    final features = DataFrame([
+      [
+        gender,
+        age,
+        height,
+        weight,
+        familyHistoryWithOverweight,
+        favc,
+        fcvc,
+        ncp,
+        caec,
+        smoke,
+        ch2o,
+        scc,
+        faf,
+        tue,
+        calc,
+        mtrans,
+      ]
+    ], headerExists: false);
 
-    final features = DataFrame.fromSeries([
-      Series('gender', [jenisKelaminController]),
-      Series('age', [usiaController]),
-      Series('height', [heightController]),
-      Series('weight', [weightController]),
-      Series('familyHistoryWithOverweight', [selectedObecity?.label]),
-      Series('favc', [selectedCalories?.label]),
-      Series('fcvc', [selectedVegetable?.label]),
-      Series('ncp', [selectedNumberFrequenceEat?.label]),
-      Series('caec', [selectedSnack?.label]),
-      Series('smoke', [selectedCigarette?.label]),
-      Series('ch2o', [selectedNumberFrequenceDrink?.label]),
-      Series('scc', [selectedCountingCalories?.label]),
-      Series('faf', [selectedNumberFrequenceActivity?.label]),
-      Series('tue', [selectedNumberFrequenceUseTech?.label]),
-      Series('calc', [selectedAlcohol?.label]),
-      Series('mtrans', [selectedTransportation?.label]),
-    ]);
+    final predictedLabels = _classifier!.predict(features);
 
-    final predictedLabels = _classifier?.predict(features);
-
-    print(" hasil ${predictedLabels}");
-
-    return predictedLabels?.rows.first.first.toString() ?? 'Unknown';
+    return predictedLabels.rows.first.first.toString();
   }
 
   Future<void> predictObesityResult() async {
     if (_classifier == null) {
-      await loadModel();
+      await loadCSVData();
     }
 
     _predictionResult = predictObesity(
       gender: jenisKelaminController.text,
-      age: double.parse(usiaController.text) ?? 0.0,
-      height: double.parse(heightController.text) ?? 0.0,
-      weight: double.parse(weightController.text) ?? 0.0,
+      age: double.parse(usiaController.text),
+      height: double.parse(heightController.text),
+      weight: double.parse(weightController.text),
       familyHistoryWithOverweight: selectedObecity?.label ?? '',
       favc: selectedCalories?.label ?? '',
-      fcvc: int.parse(selectedVegetable?.label ?? "") ?? 0,
-      ncp: double.parse(selectedNumberFrequenceEat?.label ?? "") ?? 0.0,
+      fcvc: int.parse(selectedVegetable?.label ?? "0"),
+      ncp: double.parse(selectedNumberFrequenceEat?.label ?? "0.0"),
       caec: selectedSnack?.label ?? '',
       smoke: selectedCigarette?.label ?? "",
-      ch2o: double.parse(selectedNumberFrequenceDrink?.label ?? "") ?? 0.0,
+      ch2o: double.parse(selectedNumberFrequenceDrink?.label ?? "0.0"),
       scc: selectedCountingCalories?.label ?? "",
-      faf: double.parse(selectedNumberFrequenceActivity?.label ?? "") ?? 0.0,
-      tue: double.parse(selectedNumberFrequenceUseTech?.label ?? "") ?? 0.0,
+      faf: double.parse(selectedNumberFrequenceActivity?.label ?? "0.0"),
+      tue: double.parse(selectedNumberFrequenceUseTech?.label ?? "0.0"),
       calc: selectedAlcohol?.label ?? "",
       mtrans: selectedTransportation?.label ?? "",
     );

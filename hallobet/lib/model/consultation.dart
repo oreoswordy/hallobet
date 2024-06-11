@@ -1,5 +1,5 @@
 enum TKSS {
-  choiceTidak,
+  choiceno,
   choiceKadangKadang,
   choiceSering,
   choiceSelalu,
@@ -8,30 +8,30 @@ enum TKSS {
 extension TKSSExtension on TKSS {
   String get label {
     switch (this) {
-      case TKSS.choiceTidak:
-        return 'Tidak';
+      case TKSS.choiceno:
+        return 'no';
       case TKSS.choiceKadangKadang:
-        return 'Kadang-Kadang';
+        return 'Sometimes';
       case TKSS.choiceSering:
-        return 'Sering';
+        return 'Frequently';
       case TKSS.choiceSelalu:
-        return 'Selalu';
+        return 'Always';
     }
   }
 }
 
 enum OptionCategory {
-  choiceYa,
-  choiceTidak,
+  choiceyes,
+  choiceno,
 }
 
 extension OptionCategoryExtension on OptionCategory {
   String get label {
     switch (this) {
-      case OptionCategory.choiceYa:
-        return 'Ya';
-      case OptionCategory.choiceTidak:
-        return 'Tidak';
+      case OptionCategory.choiceyes:
+        return 'yes';
+      case OptionCategory.choiceno:
+        return 'no';
     }
   }
 }
@@ -62,17 +62,17 @@ extension KSSExtension on KSS {
   String get label {
     switch (this) {
       case KSS.choiceKadangKadang:
-        return 'Kadang - Kadang';
+        return 'Sometimes';
       case KSS.choiceSering:
-        return 'Sering';
+        return 'Frequently';
       case KSS.choiceSelalu:
-        return 'Selalu';
+        return 'Always';
     }
   }
 }
 
 enum TKS {
-  choiceTidak,
+  choiceno,
   choiceKadangKadang,
   choiceSering,
 }
@@ -80,12 +80,12 @@ enum TKS {
 extension TKSExtension on TKS {
   String get label {
     switch (this) {
-      case TKS.choiceTidak:
-        return 'Tidak';
+      case TKS.choiceno:
+        return 'no';
       case TKS.choiceKadangKadang:
-        return 'Kadang - Kadang';
+        return 'Sometimes';
       case TKS.choiceSering:
-        return 'Sering';
+        return 'Frequently';
     }
   }
 }
@@ -100,11 +100,11 @@ extension TKSExtension on TKS {
 //   String get label {
 //     switch (this) {
 //       case TransportationCategory.choiceJalan:
-//         return 'Jalan Kaki';
+//         return 'Walking';
 //       case TransportationCategory.choiceUmum:
-//         return 'Transportasi Umum';
+//         return 'Public_Transportation';
 //       case TransportationCategory.choiceMobil:
-//         return 'Kendaraan Pribadi';
+//         return 'Automobile';
 //     }
 //   }
 // }
@@ -170,7 +170,7 @@ class PickOption {
         PickOption(value: 2, label: '1'),
         PickOption(value: 3, label: '2'),
         PickOption(value: 4, label: '3'),
-        PickOption(value: 5, label: 'lebih dari 3'),
+        PickOption(value: 5, label: '4'),
       ];
 }
 
@@ -191,8 +191,8 @@ class PickOptionYesNo {
   int get hashCode => value.hashCode;
 
   static List<PickOptionYesNo> get values => [
-        PickOptionYesNo(value: 1, label: 'Tidak'),
-        PickOptionYesNo(value: 2, label: 'Ya'),
+        PickOptionYesNo(value: 1, label: 'no'),
+        PickOptionYesNo(value: 2, label: 'yes'),
       ];
 }
 
@@ -213,9 +213,10 @@ class PickOptionTransportation {
   int get hashCode => value.hashCode;
 
   static List<PickOptionTransportation> get values => [
-        PickOptionTransportation(value: 1, label: 'Jalan Kaki'),
-        PickOptionTransportation(value: 2, label: 'Transportasi Umum'),
-        PickOptionTransportation(value: 3, label: 'Kendaraan Pribadi'),
+        PickOptionTransportation(value: 1, label: 'Walking'),
+        PickOptionTransportation(value: 2, label: 'Public_Transportation'),
+        PickOptionTransportation(value: 3, label: 'Automobile'),
+        PickOptionTransportation(value: 4, label: 'Motorbike'),
       ];
 }
 
@@ -236,7 +237,7 @@ class PickOptionGender {
   int get hashCode => value.hashCode;
 
   static List<PickOptionGender> get values => [
-        PickOptionGender(value: 1, label: 'Pria'),
-        PickOptionGender(value: 2, label: 'Wanita'),
+        PickOptionGender(value: 1, label: 'Male'),
+        PickOptionGender(value: 2, label: 'Female'),
       ];
 }
