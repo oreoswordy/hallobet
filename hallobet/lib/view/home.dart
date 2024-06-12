@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hallobet/view/detail_information.dart';
+import 'package:hallobet/view/konsultasi.dart';
 import 'package:hallobet/view_model/information_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:hallobet/view/about.dart';
@@ -182,6 +183,15 @@ class HomeScreen extends StatelessWidget {
                           );
                         }, "https://cdn-icons-png.flaticon.com/512/4850/4850909.png",
                             "Konsultasi"),
+                        cardMenu(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const KonsultasiScreen(),
+                            ),
+                          );
+                        }, "https://cdn-icons-png.flaticon.com/512/4850/4850909.png",
+                            "Testing Aplikasi"),
                         cardMenu(() {
                           Navigator.push(
                             context,

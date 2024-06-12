@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hallobet/model/consultation.dart';
 import 'package:hallobet/view/widget/widget.dart';
 import 'package:hallobet/view_model/consultation_view_model.dart';
+import 'package:hallobet/view_model/konsultasi_view_model.dart';
 import 'package:provider/provider.dart';
 
 class ConsultationScreen extends StatelessWidget {
@@ -14,7 +15,8 @@ class ConsultationScreen extends StatelessWidget {
       child: Scaffold(
         appBar: appBarWidget("Konsultasi Tingkat Obesitas"),
         body: SingleChildScrollView(
-          child: Container(
+          child: Consumer<KonsultasiViewModel>(builder: (context, viewModel, child) {
+            return Container(
             margin: const EdgeInsets.all(12),
             child: Consumer<ConsultationViewModel>(
               builder: (context, model, child) {
@@ -295,6 +297,7 @@ class ConsultationScreen extends StatelessWidget {
                           //   calc: model.selectedAlcohol?.label ?? "",
                           //   mtrans: model.selectedTransportation?.label ?? "",
                           // );
+                          //  Navigator.pop(context);
                         },
                         child: const Text("Submit"),
                       ),
@@ -304,10 +307,12 @@ class ConsultationScreen extends StatelessWidget {
                 );
               },
             ),
-          ),
+          );
+          },)
         ),floatingActionButton: FloatingActionButton(onPressed: () {
           ConsultationViewModel().loadCSVData();
-        },),
+        },
+        ),
       ),
     );
   }

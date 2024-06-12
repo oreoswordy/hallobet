@@ -3,6 +3,7 @@ import 'package:hallobet/view/home.dart';
 import 'package:hallobet/view/onboarding.dart';
 import 'package:hallobet/view_model/information_view_model.dart';
 import 'package:hallobet/view_model/csv_view_model.dart';
+import 'package:hallobet/view_model/konsultasi_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,6 +21,9 @@ Future<void> main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => InformationViewModel()..initialize(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => KonsultasiViewModel()..initialize(),
         ),
       ],
       child: MainApp(

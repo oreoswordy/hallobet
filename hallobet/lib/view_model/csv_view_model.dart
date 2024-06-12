@@ -34,6 +34,8 @@ class CsvViewModel extends ChangeNotifier {
       }
     }
 
+
+
     print(catCols);
     print(numCols);
 

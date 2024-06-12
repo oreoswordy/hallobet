@@ -10,7 +10,11 @@ import 'package:csv/csv.dart';
 
 import '../model/consultation.dart';
 
-class ConsultationViewModel extends ChangeNotifier {
+class KonsultasiViewModel extends ChangeNotifier {
+
+
+
+
   TextEditingController jenisKelaminController = TextEditingController();
   TextEditingController usiaController = TextEditingController();
   TextEditingController heightController = TextEditingController();
@@ -71,6 +75,9 @@ class ConsultationViewModel extends ChangeNotifier {
   String get predictionResult => _predictionResult;
 
   List<Obesity> dataset = [];
+
+  List<Obesity> get data => dataset;
+
   KnnClassifier? _classifier;
 
   int k = 5; // Nilai k untuk KNN
@@ -355,15 +362,89 @@ class ConsultationViewModel extends ChangeNotifier {
 
     final samples = DataFrame.fromRawCsv(_rawData, headerExists: true);
     final targetName = 'NObeyesdad';
+    
 
-     _classifier = KnnClassifier(
-      samples,
-      targetName,
-      k, // The number of nearest neighbours
-      distance: Distance.euclidean);
+    //  _classifier = KnnClassifier(
+    //   samples,
+    //   targetName,
+    //   k, // The number of nearest neighbours
+    //   distance: Distance.euclidean);
 
-        print(samples);
-    print(samples.rows.length);
+    // New
+    // for (int i = 0; i < point1.length; i++) {
+    // sum += pow(point1[i] - point2[i], 2);
+  // }
+    // final euclidean = sqrt(pow(selectedGender?.value ??));
+    // \[D = \sqrt{\sum_{i = 1}^{n}(A_{i} - B_{i})^{2}}\]
+
+    // Proses Pencarian Euclidean
+  
+    for (var i = 0; i < 1; i++) {
+      
+    final genderValue = selectedGender?.value ?? 0;
+    final usia = int.parse(usiaController.text);
+    final tinggi = int.parse(heightController.text);
+    final berat = int.parse(weightController.text);
+
+    final obesitasValue = selectedObecity?.value ?? 0;
+    final kaloriValue = selectedCalories?.value ?? 0;
+    final sayurValue = selectedVegetable?.value ?? 0;
+    final makanValue = selectedEat?.value ?? 0;
+    final snackValue = selectedSnack?.value ?? 0;
+    final rokokValue = selectedCigarette?.value ?? 0;
+    final minumValue = selectedDrink?.value ?? 0;
+    final menghitungKaloriValue = selectedCountingCalories?.value ?? 0;
+    final aktivitasValue = selectedActivity?.value ?? 0;
+    final teknologiValue = selectedUseTech?.value ?? 0;
+    final alkoholValue = selectedAlcohol?.value ?? 0;
+    final transportasiValue = selectedTransportation?.value ?? 0;
+    final dataRow = samples.rows.elementAt(i).toList();
+    final csvGenderValue = dataRow[0] as num;
+    final csvUsiaValue = dataRow[1] as num;
+    final csvTinggiValue = dataRow[2] as num;
+    final csvBeratValue = dataRow[3] as num;
+    final csvObesitasValue = dataRow[4] as num;
+    final csvKaloriValue = dataRow[5] as num;
+    final csvSayurValue = dataRow[6] as num;
+    final csvMakanValue = dataRow[7] as num;
+    final csvSnackValue = dataRow[8] as num;
+    final csvRokokValue = dataRow[9] as num;
+    final csvMinumValue = dataRow[10] as num;
+    final csvMenghitungKaloriValue = dataRow[11] as num;
+    final csvAktivitasValue = dataRow[12] as num;
+    final csvTeknologiValue = dataRow[13] as num;
+    final csvAlkoholValue = dataRow[14] as num;
+    final csvTransportasiValue = dataRow[15] as num;
+    final dibrot = pow(genderValue - csvGenderValue, 2) +
+                   pow(usia - csvUsiaValue, 2) +
+                   pow(tinggi - csvTinggiValue, 2) + 
+                   pow(berat - csvBeratValue, 2) +
+                   pow(obesitasValue - csvObesitasValue, 2) +
+                   pow(kaloriValue - csvKaloriValue, 2) +
+                   pow(sayurValue - csvSayurValue, 2) +
+                   pow(makanValue - csvMakanValue, 2) +
+                   pow(snackValue - csvSnackValue, 2) +
+                   pow(rokokValue - csvRokokValue, 2) +
+                   pow(minumValue - csvMinumValue, 2) +
+                   pow(menghitungKaloriValue - csvMenghitungKaloriValue, 2) +
+                   pow(aktivitasValue - csvAktivitasValue, 2) +
+                   pow(teknologiValue - csvTeknologiValue, 2) +
+                   pow(alkoholValue - csvAlkoholValue, 2) +
+                   pow(transportasiValue - csvTransportasiValue, 2);
+       
+       print('O: ${dibrot}');
+       final distance = sqrt(dibrot);
+       print('P: ${distance}');
+
+      //  print(" hasil = ${int.parse(CsvViewModel().data[i+1].genders)}");
+      //  Proses Pengurutan
+
+    }
+    
+   
+
+    //     print(samples);
+    // print(samples.rows.length);
 
 
     print('Jenis Kelamin: ${selectedGender?.value ?? "belum diisi"}');
@@ -456,19 +537,21 @@ class ConsultationViewModel extends ChangeNotifier {
     final samples = DataFrame(rows);
     final targetName = 'NObeyesdad';
 
-    print(samples);
-    print(samples.rows.length);
+    // print(samples);
+    // print(samples.rows.length);
 
-    // _classifier = KnnClassifier(
-    //   samples,
-    //   targetName,
-    //   3, // The number of nearest neighbours
-    //   distance: Distance.euclidean,
-    // );
+    //Sumber Masalah
 
-     final predict = _classifier!.predict(samples).toMatrix();
+  //   _classifier = KnnClassifier(
+  //     samples,
+  //     targetName,
+  //     3, // The number of nearest neighbours
+  //     distance: Distance.euclidean,
+  //   );
 
-  predict[0][0].toString();
+  //    final predict = _classifier!.predict(samples).toMatrix();
+
+  // predict[0][0].toString();
   }
 
   String predictObesity({
@@ -544,5 +627,23 @@ class ConsultationViewModel extends ChangeNotifier {
     );
 
     notifyListeners();
+    
   }
+
+  Future<void> loadCSV() async {
+    final _rawData = await rootBundle.loadString("assets/obesity_dataset.csv");
+    List<List<dynamic>> _listData =
+        const CsvToListConverter().convert(_rawData);
+
+    final samples = DataFrame.fromRawCsv(_rawData, headerExists: true);
+    final targetName = 'NObeyesdad';
+
+  }
+
+void initialize() {
+    if (dataset.isEmpty) {
+      loadCSV();
+    }
+  }
+  
 }
