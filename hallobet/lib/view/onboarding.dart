@@ -21,10 +21,7 @@ class OnBoardingScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.network(
-                width: MediaQuery.of(context).size.width * 0.75,
-                "https://static.vecteezy.com/system/resources/previews/027/951/012/non_2x/pixel-art-happy-girl-group-character-png.png",
-              ),
+              Image.asset("assets/image/onboard.png"),
               const SizedBox(height: 24),
               Text(
                 textAlign: TextAlign.center,

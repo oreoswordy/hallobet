@@ -41,7 +41,16 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(
+        fontFamily: 'Gilroy',
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: wasOnboarding ? '/' : '/onboarding',
       routes: {

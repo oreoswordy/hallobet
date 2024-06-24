@@ -29,3 +29,19 @@ flutter:
     - assets/dummy.json
     - assets/obesity_dataset.csv
     - assets/image/
+    - assets/fonts/
+
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/Gilroy/Gilroy-Regular.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-Medium.ttf
+        - asset: assets/fonts/Gilroy/Gilroy-Bold.ttf
+
+    - family: Righteous
+      fonts:
+        - asset: assets/fonts/Righteous/Righteous-Regular.ttf
+
+    - family: Gotham
+      fonts:
+        - asset: assets/fonts/Gotham/GothamBold.ttf

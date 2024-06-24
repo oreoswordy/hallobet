@@ -48,12 +48,12 @@ class DetailInformation extends StatelessWidget {
               const SizedBox(height: 12),
               Text(
                 """
-                $desc
+$desc
                 """,
-                style: GoogleFonts.openSans(
-                  fontSize: 16,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: MediaQuery.of(context).size.width * 0.045,
                 ),
-                textAlign: TextAlign.justify,
               ),
             ],
           ),

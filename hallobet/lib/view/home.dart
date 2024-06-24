@@ -1,13 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hallobet/view/about.dart';
 import 'package:hallobet/view/detail_information.dart';
-import 'package:hallobet/view/konsultasi.dart';
 import 'package:hallobet/view_model/information_view_model.dart';
 import 'package:provider/provider.dart';
-import 'package:hallobet/view/about.dart';
 import 'package:hallobet/view/consultation.dart';
-import 'package:hallobet/view/csv.dart';
 import 'package:hallobet/view/information.dart';
 import 'package:hallobet/view/widget/widget.dart';
 
@@ -17,32 +15,38 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        scrolledUnderElevation: 0,
-        title: Column(
-          children: [
-            Text(
-              "OBESTIE",
-              style: GoogleFonts.righteous(
-                textStyle: const TextStyle(
-                  color: Colors.indigo,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28,
-                ),
-              ),
-            ),
-            const SizedBox(height: 3),
-          ],
-        ),
-      ),
+      appBar: appsBar(),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Halo teman, ",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[500],
+                      ),
+                    ),
+                    Text(
+                      "Selamat datang di hallobet",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 12),
               Consumer<InformationViewModel>(
                 builder: (context, viewModel, child) {
                   return CarouselSlider(
@@ -116,10 +120,9 @@ class HomeScreen extends StatelessWidget {
                                         const SizedBox(height: 6),
                                         Text(
                                           item.description,
-                                          maxLines: 3,
-                                          softWrap: true,
+                                          maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
-                                          style: GoogleFonts.openSans(
+                                          style: const TextStyle(
                                             fontSize: 16,
                                           ),
                                         ),
@@ -162,8 +165,7 @@ class HomeScreen extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 12,
                       children: [
                         cardMenu(() {
                           Navigator.push(
@@ -187,25 +189,7 @@ class HomeScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const KonsultasiScreen(),
-                            ),
-                          );
-                        }, "https://cdn-icons-png.flaticon.com/512/4850/4850909.png",
-                            "Testing Aplikasi"),
-                        cardMenu(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
                               builder: (context) => const AboutScreen(),
-                            ),
-                          );
-                        }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",
-                            "Tentang Aplikasi"),
-                        cardMenu(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const CsvScreen(),
                             ),
                           );
                         }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",

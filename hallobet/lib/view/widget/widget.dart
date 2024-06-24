@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hallobet/utils/apps_color.dart';
 
 Widget textFieldConsultation(String hint, TextEditingController controller) {
   return TextField(
@@ -30,7 +31,7 @@ Widget cardInformation(Function()? func, BuildContext context, String image,
               height: MediaQuery.of(context).size.height * 0.3,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.amber,
+                color: AppsColor.secondaryColor,
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   fit: BoxFit.cover,
@@ -92,17 +93,41 @@ Widget textfieldNumber(String title, TextEditingController controller) {
 Widget cardMenu(Function()? func, String image, String title) {
   return GestureDetector(
     onTap: func,
-    child: Card(
-      child: Center(
+    child: Container(
+      child: Card(
+        elevation: 0,
+        color: Colors.transparent,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              image,
-              height: 75,
+            Container(
+              height: 125,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: AppsColor.secondAccentColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 12), // Add padding to shrink the image
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
             ),
-            const SizedBox(height: 12),
-            Text(title),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -178,5 +203,16 @@ Widget tagText(String tag) {
   return Text(
     tag,
     style: TextStyle(fontSize: 16, color: Colors.grey),
+  );
+}
+
+AppBar appsBar() {
+  return AppBar(
+    centerTitle: true,
+    title: const Text(
+      'HALLOBET',
+      style: TextStyle(
+          fontFamily: 'Gotham', fontSize: 18, color: AppsColor.accentColor),
+    ),
   );
 }
