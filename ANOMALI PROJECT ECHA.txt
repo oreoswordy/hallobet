@@ -1,0 +1,12 @@
+ANOMALI
+
+- Kategori snack ada 4 tpi kenapa input usernya ada 5
+- Kategori alkohol ada 4 tpi kenapa input usernya ada 5
+- Kategori transportasi ada 5 tapi kenapa input usernya ada 4
+
+Transportasi
+- Walking
+- Bike
+- Motorbike
+- Public_Transportation
+- Automobile
