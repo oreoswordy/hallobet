@@ -195,15 +195,15 @@ class HomeScreen extends StatelessWidget {
                           );
                         }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",
                             "Tentang Aplikasi"),
-                        cardMenu(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const CsvScreen(),
-                            ),
-                          );
-                        }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",
-                            "Tentang Aplikasi"),
+                        // cardMenu(() {
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const CsvScreen(),
+                        //     ),
+                        //   );
+                        // }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",
+                        //     "Tentang Aplikasi"),
                       ],
                     ),
                   ],

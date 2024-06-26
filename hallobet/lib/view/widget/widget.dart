@@ -103,7 +103,7 @@ Widget cardMenu(Function()? func, String image, String title) {
               height: 125,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppsColor.secondAccentColor,
+                color: AppsColor.accentColor.withOpacity(0.50),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
