@@ -1,3 +1,4 @@
+import 'dart:js_interop';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -490,8 +491,7 @@ class ConsultationViewModel extends ChangeNotifier {
     //     transportasiValue;
 
     // Ada hal aneh, Di dataset hanya ada 4 kategori tapi di inputan ada 5 kategori
-    print('Nilai Gender Input User = $snackValue');
-
+    // print('Nilai Gender Input User = $snackValue');
     // print('Nilai Sayur Input User = $sayurValue');
     // print('Nilai Makan Input User = $makanValue');
     // print('Nilai Minum Input User = $minumValue');
@@ -529,43 +529,46 @@ class ConsultationViewModel extends ChangeNotifier {
       }
     }
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 2110; i++) {
       final dataRow = samples.rows.elementAt(i).toList();
       final csvGenderValue = dataRow[0] as num;
       final csvUsiaValue = dataRow[1] as num;
       final csvTinggiValue = dataRow[2] as num;
       final csvBeratValue = dataRow[3] as num;
       final csvObesitasValue = convertStringToNum(dataRow[4] as String, 4);
-      // final csvKaloriValue = dataRow[5] as num; INI SUMBER MASALAH
+      final csvKaloriValue = convertStringToNum(dataRow[5] as String, 5);
       final csvSayurValue = dataRow[6] as num;
       final csvMakanValue = dataRow[7] as num;
-      // final csvSnackValue = dataRow[8] as num;
-      // final csvRokokValue = dataRow[9] as num;
+      final csvSnackValue = convertStringToNum(dataRow[8] as String, 8);
+      final csvRokokValue = convertStringToNum(dataRow[9] as String, 9);
       final csvMinumValue = dataRow[10] as num;
-      // final csvMenghitungKaloriValue = dataRow[11] as num;
+      final csvMenghitungKaloriValue =
+          convertStringToNum(dataRow[11] as String, 11);
       final csvAktivitasValue = dataRow[12] as num;
       final csvTeknologiValue = dataRow[13] as num;
-      // final csvAlkoholValue = dataRow[14] as num;
-      // final csvTransportasiValue = dataRow[15] as num;
+      final csvAlkoholValue = convertStringToNum(dataRow[14] as String, 14);
+      final csvTransportasiValue =
+          convertStringToNum(dataRow[15] as String, 15);
       final csvDiagnosis = dataRow[16] as String;
 
-      print('Nilai Index 0 baris ${i + 1} : ${csvGenderValue}');
-      print('Nilai Index 1 baris ${i + 1} : ${csvUsiaValue}');
-      print('Nilai Index 2 baris ${i + 1} : ${csvTinggiValue}');
-      print('Nilai Index 3 baris ${i + 1} : ${csvBeratValue}');
-      print('Nilai Index 4 baris ${i + 1} : ${csvObesitasValue}');
-      // print('Nilai Index 5 baris ${i+1} : ${csvKaloriValue}'); INI SUMBER MASALAH
-      print('Nilai Index 6 baris ${i + 1} : ${csvSayurValue}');
-      print('Nilai Index 7 baris ${i + 1} : ${csvMakanValue}');
-      // print('Nilai Index 8 baris ${i+1} : ${csvSnackValue}');
-      // print('Nilai Index 9 baris ${i+1} : ${csvRokokValue}');
-      print('Nilai Index 10 baris ${i + 1} : ${csvMinumValue}');
-      // print('Nilai Index 11 baris ${i+1} : ${csvMenghitungKaloriValue}');
-      print('Nilai Index 12 baris ${i + 1} : ${csvAktivitasValue}');
-      print('Nilai Index 13 baris ${i + 1} : ${csvTeknologiValue}');
-      // print('Nilai Index 14 baris ${i+1} : ${csvAlkoholValue}');
-      // print('Nilai Index 15 baris ${i+1} : ${csvTransportasiValue}');
-      print('Nilai Index 16 baris ${i + 1} : ${csvDiagnosis}');
+      // Digunakan untuk pengecekan dataset apakah data yang diambil sdh sesuai
+      // print('Nilai Index 0 baris ${i + 1} : ${csvGenderValue}');
+      // print('Nilai Index 1 baris ${i + 1} : ${csvUsiaValue}');
+      // print('Nilai Index 2 baris ${i + 1} : ${csvTinggiValue}');
+      // print('Nilai Index 3 baris ${i + 1} : ${csvBeratValue}');
+      // print('Nilai Index 4 baris ${i + 1} : ${csvObesitasValue}');
+      // print('Nilai Index 5 baris ${i + 1} : ${csvKaloriValue}');
+      // print('Nilai Index 6 baris ${i + 1} : ${csvSayurValue}');
+      // print('Nilai Index 7 baris ${i + 1} : ${csvMakanValue}');
+      // print('Nilai Index 8 baris ${i + 1} : ${csvSnackValue}');
+      // print('Nilai Index 9 baris ${i + 1} : ${csvRokokValue}');
+      // print('Nilai Index 10 baris ${i + 1} : ${csvMinumValue}');
+      // print('Nilai Index 11 baris ${i + 1} : ${csvMenghitungKaloriValue}');
+      // print('Nilai Index 12 baris ${i + 1} : ${csvAktivitasValue}');
+      // print('Nilai Index 13 baris ${i + 1} : ${csvTeknologiValue}');
+      // print('Nilai Index 14 baris ${i + 1} : ${csvAlkoholValue}');
+      // print('Nilai Index 15 baris ${i + 1} : ${csvTransportasiValue}');
+      // print('Nilai Index 16 baris ${i + 1} : ${csvDiagnosis}');
 
       // Ini hanya pengecekan apakah nilai yang diambil dari dataset bisa digunakan untuk perhitungan
       // final teshitung = csvGenderValue +
@@ -584,18 +587,18 @@ class ConsultationViewModel extends ChangeNotifier {
           pow(usia - csvUsiaValue, 2) +
           pow(tinggi - csvTinggiValue, 2) +
           pow(berat - csvBeratValue, 2) +
-          //  pow(obesitasValue - csvObesitasValue, 2) +
-          //  pow(kaloriValue - csvKaloriValue, 2) +
+          pow(obesitasValue - csvObesitasValue, 2) +
+          pow(kaloriValue - csvKaloriValue, 2) +
           pow(sayurValue - csvSayurValue, 2) +
           pow(makanValue - csvMakanValue, 2) +
-          //  pow(snackValue - csvSnackValue, 2) +
-          //  pow(rokokValue - csvRokokValue, 2) +
+          pow(snackValue - csvSnackValue, 2) +
+          pow(rokokValue - csvRokokValue, 2) +
           pow(minumValue - csvMinumValue, 2) +
-          //  pow(menghitungKaloriValue - csvMenghitungKaloriValue, 2) +
+          pow(menghitungKaloriValue - csvMenghitungKaloriValue, 2) +
           pow(aktivitasValue - csvAktivitasValue, 2) +
-          pow(teknologiValue - csvTeknologiValue, 2);
-      //  pow(alkoholValue - csvAlkoholValue, 2) +
-      //  pow(transportasiValue - csvTransportasiValue, 2);
+          pow(teknologiValue - csvTeknologiValue, 2) +
+          pow(alkoholValue - csvAlkoholValue, 2) +
+          pow(transportasiValue - csvTransportasiValue, 2);
       final pangkat = sqrt(hitung);
 
       // Fungsi untuk menambahkan data ke dalam List
@@ -606,10 +609,11 @@ class ConsultationViewModel extends ChangeNotifier {
         'diagnosis': csvDiagnosis,
       });
 
-      // print('Nilai  baris ke - ${i + 1} : ${dibrot}');
-      print('=================================');
+      // print('Nilai  baris ke - ${i + 1} : ${hitung}');
+      // print('=================================');
     }
 
+    print('=================================');
     print(' Hasil Hitung Euclidean Distance ');
     print('=================================');
 
@@ -617,29 +621,34 @@ class ConsultationViewModel extends ChangeNotifier {
     // print('Nilai  euclidean baris ke 2 : ${euclidean[1]}');
 
     // Hasil Nilai Hitung Euclidean
-    for (int i = 0; i < euclidean.length; i++) {
-      print('Nilai euclidean baris ke - [${i + 1}] = ${euclidean[i]}');
-    }
+    // for (int i = 0; i < euclidean.length; i++) {
+    //   print('Nilai euclidean baris ke - [${i + 1}] = ${euclidean[i]}');
+    // }
 
-    for (int i = 0; i < HasilAkhir.length; i++) {
-      print('Nilai Hasil Akhir Baris ke - [${i + 1}] : ${HasilAkhir[i]}');
-    }
+    // for (int i = 0; i < HasilAkhir.length; i++) {
+    //   print('Nilai Hasil Akhir Baris ke - [${i + 1}] : ${HasilAkhir[i]}');
+    // }
 
     // Sort Hasil Euclidean
     HasilAkhir.sort((a, b) => a['result'].compareTo(b['result']));
 
     // euclidean.sort();
-    print('=================================');
-    print('Hasil Sort Euclidean : ${HasilAkhir}');
-    print('=================================');
+    // print('=================================');
+    // for (int i = 0; i < HasilAkhir.length; i++) {
+    //   print(
+    //       'Hasil Euclidean setelah Sort, Baris ke - [${i + 1}] : ${HasilAkhir[i]}');
+    // }
+    // print('=================================');
 
     // Mengambil nilai K terdekat dari List
     // List<double> terdekat = euclidean.sublist(0, 3);
     // print('Inilah 3 Nilai Terdekat : ${terdekat}');
 
     // Mengambil 3 nilai terdekat dari Map
-    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 3);
-    print('Tiga Nilai Terdekat: $terdekat');
+    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 2);
+    for (int i = 0; i < terdekat.length; i++) {
+      print('Tujuh Nilai Terdekat, Baris ke - [${i + 1}] : ${terdekat[i]}');
+    }
     print('=================================');
 
     // Fungsi untuk mencari Diagnosis apa yang paling sering keluar diantara tetanggga terdekat
