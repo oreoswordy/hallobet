@@ -40,7 +40,7 @@ class CsvViewModel extends ChangeNotifier {
     print(numCols);
 
     List<List<dynamic>> transformedData = preprocessData(_listData);
-    log(transformedData.toString());
+    print(transformedData.toString());
 
     final samplesTransformed = DataFrame(transformedData, headerExists: true);
 

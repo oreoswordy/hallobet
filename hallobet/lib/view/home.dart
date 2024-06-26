@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hallobet/view/about.dart';
+import 'package:hallobet/view/csv.dart';
 import 'package:hallobet/view/detail_information.dart';
 import 'package:hallobet/view_model/information_view_model.dart';
 import 'package:provider/provider.dart';
@@ -190,6 +191,15 @@ class HomeScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => const AboutScreen(),
+                            ),
+                          );
+                        }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",
+                            "Tentang Aplikasi"),
+                        cardMenu(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CsvScreen(),
                             ),
                           );
                         }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",

@@ -529,7 +529,7 @@ class ConsultationViewModel extends ChangeNotifier {
       }
     }
 
-    for (int i = 0; i < 2110; i++) {
+    for (int i = 0; i < 498; i++) {
       final dataRow = samples.rows.elementAt(i).toList();
       final csvGenderValue = dataRow[0] as num;
       final csvUsiaValue = dataRow[1] as num;
@@ -645,7 +645,7 @@ class ConsultationViewModel extends ChangeNotifier {
     // print('Inilah 3 Nilai Terdekat : ${terdekat}');
 
     // Mengambil 3 nilai terdekat dari Map
-    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 2);
+    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 8);
     for (int i = 0; i < terdekat.length; i++) {
       print('Tujuh Nilai Terdekat, Baris ke - [${i + 1}] : ${terdekat[i]}');
     }
