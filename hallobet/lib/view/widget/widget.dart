@@ -210,7 +210,7 @@ AppBar appsBar() {
   return AppBar(
     centerTitle: true,
     title: const Text(
-      'HALLOBET',
+      'OBESTIE',
       style: TextStyle(
           fontFamily: 'Gotham', fontSize: 18, color: AppsColor.accentColor),
     ),
