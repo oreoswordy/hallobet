@@ -653,7 +653,7 @@ class ConsultationViewModel extends ChangeNotifier {
     // print('Inilah 3 Nilai Terdekat : ${terdekat}');
 
     // Mengambil 3 nilai terdekat dari Map
-    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 7);
+    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 8);
     for (int i = 0; i < terdekat.length; i++) {
       print('Tujuh Nilai Terdekat, Baris ke - [${i + 1}] : ${terdekat[i]}');
     }
