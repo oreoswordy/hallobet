@@ -173,6 +173,30 @@ class PickOption {
       ];
 }
 
+class PickOptionNol {
+  final int value;
+  final String label;
+
+  PickOptionNol({required this.value, required this.label});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PickOptionNol &&
+          runtimeType == other.runtimeType &&
+          value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  static List<PickOptionNol> get values => [
+        PickOptionNol(value: 1, label: '1'),
+        PickOptionNol(value: 2, label: '2'),
+        PickOptionNol(value: 3, label: '3'),
+      ];
+}
+
+
 class PickOptionYesNo {
   final int value;
   final String label;
@@ -190,8 +214,8 @@ class PickOptionYesNo {
   int get hashCode => value.hashCode;
 
   static List<PickOptionYesNo> get values => [
-        PickOptionYesNo(value: 1, label: 'no'),
-        PickOptionYesNo(value: 2, label: 'yes'),
+        PickOptionYesNo(value: 0, label: 'no'),
+        PickOptionYesNo(value: 1, label: 'yes'),
       ];
 }
 
@@ -212,10 +236,11 @@ class PickOptionTransportation {
   int get hashCode => value.hashCode;
 
   static List<PickOptionTransportation> get values => [
-        PickOptionTransportation(value: 1, label: 'Walking'),
-        PickOptionTransportation(value: 2, label: 'Public_Transportation'),
-        PickOptionTransportation(value: 3, label: 'Automobile'),
-        PickOptionTransportation(value: 4, label: 'Motorbike'),
+        PickOptionTransportation(value: 0, label: 'Jalan Kaki'),
+        PickOptionTransportation(value: 1, label: 'Sepeda'),
+        PickOptionTransportation(value: 2, label: 'Transportasi Publik'),
+        PickOptionTransportation(value: 3, label: 'Sepeda Motor'),
+        PickOptionTransportation(value: 4, label: 'Mobil'),
       ];
 }
 
@@ -236,7 +261,7 @@ class PickOptionGender {
   int get hashCode => value.hashCode;
 
   static List<PickOptionGender> get values => [
-        PickOptionGender(value: 1, label: 'Male'),
-        PickOptionGender(value: 2, label: 'Female'),
+        PickOptionGender(value: 0, label: 'Male'),
+        PickOptionGender(value: 1, label: 'Female'),
       ];
 }

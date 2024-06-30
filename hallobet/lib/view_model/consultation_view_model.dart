@@ -216,6 +216,15 @@ class ConsultationViewModel extends ChangeNotifier {
     }).toList();
   }
 
+  List<DropdownMenuItem<PickOptionNol>> get numberPickOptionItemsNol {
+    return PickOptionNol.values.map((choice) {
+      return DropdownMenuItem<PickOptionNol>(
+        value: choice,
+        child: Text(choice.label),
+      );
+    }).toList();
+  }
+
   void setPickOption(PickOption? value) {
     selectedPickOption = value;
     pickOptionController.text = value?.label ?? "";
@@ -455,7 +464,8 @@ class ConsultationViewModel extends ChangeNotifier {
     // Mengambil Nilai Inputan User lalu mengubahnya menjadi angka yang bisa dihitung
     final genderValue = selectedGender?.value ?? 0;
     final usia = int.parse(usiaController.text);
-    final tinggi = int.parse(heightController.text);
+    final tinggiValue = int.parse(heightController.text);
+    final tinggi = tinggiValue/100;
     final berat = int.parse(weightController.text);
 
     final obesitasValue = selectedObecity?.value ?? 0;
@@ -494,6 +504,7 @@ class ConsultationViewModel extends ChangeNotifier {
     // print('Nilai Sayur Input User = $sayurValue');
     // print('Nilai Makan Input User = $makanValue');
     // print('Nilai Minum Input User = $minumValue');
+    // print('Nilai Tinggi Setelah Dibagi 100 = $tinggi');
 
     List<double> euclidean = [];
 
@@ -503,51 +514,49 @@ class ConsultationViewModel extends ChangeNotifier {
     print(' Penyesuaian nilai Dataset');
     print('=================================');
 
-    // Fungsi Konversi Dataset
-    num convertStringToNum(String value, int row) {
-      switch (row) {
-        case 4:
-        case 5:
-        case 9:
-        case 11:
-          return (value == 'yes') ? 1 : 0;
-        case 8:
-        case 14:
-          if (value == 'Sometimes') return 1;
-          if (value == 'Frequently') return 2;
-          if (value == 'Always') return 3;
-          return 0; // 'no'
-        case 15:
-          if (value == 'Public_Transportation') return 1;
-          if (value == 'Bike') return 2;
-          if (value == 'Motorbike') return 3;
-          if (value == 'Automobile') return 4;
-          return 0; // 'Walking'
-        default:
-          return 0;
-      }
-    }
+    // // Fungsi Konversi Dataset
+    // num convertStringToNum(String value, int row) {
+    //   switch (row) {
+    //     case 4:
+    //     case 5:
+    //     case 9:
+    //     case 11:
+    //       return (value == 'yes') ? 1 : 0;
+    //     case 8:
+    //     case 14:
+    //       if (value == 'Sometimes') return 1;
+    //       if (value == 'Frequently') return 2;
+    //       if (value == 'Always') return 3;
+    //       return 0; // 'no'
+    //     case 15:
+    //       if (value == 'Public_Transportation') return 1;
+    //       if (value == 'Bike') return 2;
+    //       if (value == 'Motorbike') return 3;
+    //       if (value == 'Automobile') return 4;
+    //       return 0; // 'Walking'
+    //     default:
+    //       return 0;
+    //   }
+    // }
 
-    for (int i = 0; i < 498; i++) {
+    for (int i = 0; i < 2110; i++) {
       final dataRow = samples.rows.elementAt(i).toList();
       final csvGenderValue = dataRow[0] as num;
       final csvUsiaValue = dataRow[1] as num;
       final csvTinggiValue = dataRow[2] as num;
       final csvBeratValue = dataRow[3] as num;
-      final csvObesitasValue = convertStringToNum(dataRow[4] as String, 4);
-      final csvKaloriValue = convertStringToNum(dataRow[5] as String, 5);
+      final csvObesitasValue = dataRow[4] as num;
+      final csvKaloriValue = dataRow[5] as num;
       final csvSayurValue = dataRow[6] as num;
       final csvMakanValue = dataRow[7] as num;
-      final csvSnackValue = convertStringToNum(dataRow[8] as String, 8);
-      final csvRokokValue = convertStringToNum(dataRow[9] as String, 9);
+      final csvSnackValue = dataRow[8] as num;
+      final csvRokokValue = dataRow[9] as num;
       final csvMinumValue = dataRow[10] as num;
-      final csvMenghitungKaloriValue =
-          convertStringToNum(dataRow[11] as String, 11);
+      final csvMenghitungKaloriValue = dataRow[11] as num;
       final csvAktivitasValue = dataRow[12] as num;
       final csvTeknologiValue = dataRow[13] as num;
-      final csvAlkoholValue = convertStringToNum(dataRow[14] as String, 14);
-      final csvTransportasiValue =
-          convertStringToNum(dataRow[15] as String, 15);
+      final csvAlkoholValue = dataRow[14] as num;
+      final csvTransportasiValue = dataRow[15] as num;
       final csvDiagnosis = dataRow[16] as String;
 
       // Digunakan untuk pengecekan dataset apakah data yang diambil sdh sesuai
@@ -644,7 +653,7 @@ class ConsultationViewModel extends ChangeNotifier {
     // print('Inilah 3 Nilai Terdekat : ${terdekat}');
 
     // Mengambil 3 nilai terdekat dari Map
-    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 8);
+    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 7);
     for (int i = 0; i < terdekat.length; i++) {
       print('Tujuh Nilai Terdekat, Baris ke - [${i + 1}] : ${terdekat[i]}');
     }
