@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hallobet/view/about.dart';
-import 'package:hallobet/view/csv.dart';
 import 'package:hallobet/view/detail_information.dart';
 import 'package:hallobet/view_model/information_view_model.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Selamat datang di hallobet",
+                      "Selamat datang di obestie!",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -175,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => const InformationScreen(),
                             ),
                           );
-                        }, "https://cdn-icons-png.flaticon.com/512/9340/9340025.png",
+                        }, "https://cdni.iconscout.com/illustration/premium/thumb/fat-patient-visiting-nutritionist-4991681-4167010.png",
                             "Informasi Kesehatan"),
                         cardMenu(() {
                           Navigator.push(
@@ -184,7 +183,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => const ConsultationScreen(),
                             ),
                           );
-                        }, "https://cdn-icons-png.flaticon.com/512/4850/4850909.png",
+                        }, "https://cdni.iconscout.com/illustration/premium/thumb/obesity-problem-7869476-6324037.png",
                             "Konsultasi"),
                         cardMenu(() {
                           Navigator.push(
@@ -193,7 +192,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => const AboutScreen(),
                             ),
                           );
-                        }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",
+                        }, "https://cdni.iconscout.com/illustration/premium/thumb/obesity-consultation-4036155-3363868.png?f=webp",
                             "Tentang Aplikasi"),
                         // cardMenu(() {
                         //   Navigator.push(
