@@ -3,7 +3,7 @@ import 'dart:convert';
 class Information {
   String title;
   String description;
-  String image; 
+  String image;
   Information({
     required this.title,
     required this.description,
@@ -28,5 +28,6 @@ class Information {
 
   String toJson() => json.encode(toMap());
 
-  factory Information.fromJson(String source) => Information.fromMap(json.decode(source));
+  factory Information.fromJson(String source) =>
+      Information.fromMap(json.decode(source));
 }

@@ -174,6 +174,76 @@ class PickOption {
       ];
 }
 
+class PickOption1 {
+  final int value;
+  final String label;
+
+  PickOption1({required this.value, required this.label});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PickOption1 &&
+          runtimeType == other.runtimeType &&
+          value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  static List<PickOption1> get values => [
+        PickOption1(value: 1, label: '1'),
+        PickOption1(value: 2, label: '2'),
+        PickOption1(value: 3, label: '3 Atau Lebih'),
+      ];
+}
+
+class PickOption2 {
+  final int value;
+  final String label;
+
+  PickOption2({required this.value, required this.label});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PickOption2 &&
+          runtimeType == other.runtimeType &&
+          value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  static List<PickOption2> get values => [
+        PickOption2(value: 1, label: '1'),
+        PickOption2(value: 2, label: '2'),
+        PickOption2(value: 3, label: '3'),
+        PickOption2(value: 4, label: '4 Atau Lebih'),
+      ];
+}
+
+class PickOption3 {
+  final int value;
+  final String label;
+
+  PickOption3({required this.value, required this.label});
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PickOption3 &&
+          runtimeType == other.runtimeType &&
+          value == other.value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  static List<PickOption3> get values => [
+        PickOption3(value: 0, label: '0'),
+        PickOption3(value: 1, label: '1'),
+        PickOption3(value: 2, label: '2 Atau Lebih'),
+      ];
+}
+
 class PickOptionYesNo {
   final int value;
   final String label;
