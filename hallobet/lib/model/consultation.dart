@@ -173,35 +173,22 @@ class PickOption {
       ];
 }
 
-<<<<<<< HEAD
 class PickOption1 {
   final int value;
   final String label;
 
   PickOption1({required this.value, required this.label});
-=======
-class PickOptionNol {
-  final int value;
-  final String label;
-
-  PickOptionNol({required this.value, required this.label});
->>>>>>> 7eb020da500a4d94132c5e48df59009bef6ab43f
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-<<<<<<< HEAD
       other is PickOption1 &&
-=======
-      other is PickOptionNol &&
->>>>>>> 7eb020da500a4d94132c5e48df59009bef6ab43f
           runtimeType == other.runtimeType &&
           value == other.value;
 
   @override
   int get hashCode => value.hashCode;
 
-<<<<<<< HEAD
   static List<PickOption1> get values => [
         PickOption1(value: 1, label: '1'),
         PickOption1(value: 2, label: '2'),
@@ -255,15 +242,6 @@ class PickOption3 {
         PickOption3(value: 2, label: '2 Atau Lebih'),
       ];
 }
-=======
-  static List<PickOptionNol> get values => [
-        PickOptionNol(value: 1, label: '1'),
-        PickOptionNol(value: 2, label: '2'),
-        PickOptionNol(value: 3, label: '3'),
-      ];
-}
-
->>>>>>> 7eb020da500a4d94132c5e48df59009bef6ab43f
 
 class PickOptionYesNo {
   final int value;
