@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hallobet/utils/apps_color.dart';
 import 'package:hallobet/view/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,52 +17,60 @@ class OnBoardingScreen extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset("assets/image/onboard.png"),
-              const SizedBox(height: 24),
-              Text(
-                textAlign: TextAlign.center,
-                'Welcome to the Onboarding Screen',
-                style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.white,
-                ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset("assets/image/onboard.png"),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              textAlign: TextAlign.center,
+              'Selamat Datang di Obestie!',
+              style: GoogleFonts.montserrat(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: Colors.white,
               ),
-              const SizedBox(height: 12),
-              const Text(
-                'This is the description of the onboarding screen.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              textAlign: TextAlign.center,
+              'Teman obesitasmu yang akan membantumu mengatur pola makan dan olahraga agar tetap sehat dan bugar!',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
               ),
-              const SizedBox(height: 48),
-              ElevatedButton(
+            ),
+            const SizedBox(height: 48),
+            SizedBox(
+              height: 48,
+              child: ElevatedButton(
                 onPressed: () async {
                   SharedPreferences preferences =
                       await SharedPreferences.getInstance();
                   await preferences.setBool('wasOnboarding', true);
 
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
-                      ));
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomeScreen(),
+                    ),
+                    (route) => false,
+                  );
                 },
                 child: const Text(
-                  'Get Started',
+                  'Mulai Sekarang',
                   style: TextStyle(
                     fontSize: 18,
+                    color: AppsColor.accentColor,
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

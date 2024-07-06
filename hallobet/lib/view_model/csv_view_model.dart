@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hallobet/model/obesity.dart';
@@ -40,7 +38,7 @@ class CsvViewModel extends ChangeNotifier {
     print(numCols);
 
     List<List<dynamic>> transformedData = preprocessData(_listData);
-    log(transformedData.toString());
+    print(transformedData.toString());
 
     final samplesTransformed = DataFrame(transformedData, headerExists: true);
 

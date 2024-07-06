@@ -86,7 +86,7 @@ class ConsultationScreen extends StatelessWidget {
                               isExpanded: true,
                               value: model.selectedVegetable,
                               onChanged: model.setVegetable,
-                              items: model.numberPickOptionItems1,
+                              items: model.numberPickOptionItems,
                             ),
                           ),
                           const SizedBox(width: 24),
@@ -109,7 +109,7 @@ class ConsultationScreen extends StatelessWidget {
                               hint: const Text('Pilih'),
                               isExpanded: true,
                               value: model.selectedEat,
-                              items: model.numberPickOptionItems2,
+                              items: model.numberPickOptionItems,
                               onChanged: model.setEat,
                             ),
                           ),
@@ -159,7 +159,7 @@ class ConsultationScreen extends StatelessWidget {
                               isExpanded: true,
                               value: model.selectedDrink,
                               onChanged: model.setDrink,
-                              items: model.numberPickOptionItems1,
+                              items: model.numberPickOptionItems,
                             ),
                           ),
                           const SizedBox(width: 24),
@@ -210,7 +210,7 @@ class ConsultationScreen extends StatelessWidget {
                               isExpanded: true,
                               value: model.selectedUseTech,
                               onChanged: model.setUseTech,
-                              items: model.numberPickOptionItems3,
+                              items: model.numberPickOptionItems,
                             ),
                           ),
                           const SizedBox(width: 24),
@@ -260,10 +260,45 @@ class ConsultationScreen extends StatelessWidget {
                           ),
                           onPressed: () {
                             model.submit();
-
-                            // Panggil fungsi untuk menampilkan dialog prediksi
-                            _showPredictionDialog(
-                                context, model.predictionResult);
+                            // model.predictObesityResult();
+                            // model.predictObesityResult();
+                            // model.predictObesityResult();
+                            // model.predictObesity(
+                            //   gender: model.jenisKelaminController.text,
+                            //   age: double.tryParse(model.usiaController.text) ??
+                            //       0.0,
+                            //   height:
+                            //       double.tryParse(model.heightController.text) ??
+                            //           0.0,
+                            //   weight:
+                            //       double.tryParse(model.weightController.text) ??
+                            //           0.0,
+                            //   familyHistoryWithOverweight:
+                            //       model.selectedObecity?.label ?? '',
+                            //   favc: model.selectedCalories?.label ?? '',
+                            //   fcvc: int.tryParse(
+                            //           model.selectedVegetable?.label ?? "") ??
+                            //       0,
+                            //   ncp: double.tryParse(
+                            //           model.selectedNumberFrequenceEat?.label ??
+                            //               "") ??
+                            //       0.0,
+                            //   caec: model.selectedSnack?.label ?? '',
+                            //   smoke: model.selectedCigarette?.label ?? "",
+                            //   ch2o: double.parse(
+                            //       model.selectedNumberFrequenceDrink?.label ??
+                            //           ""),
+                            //   scc: model.selectedCountingCalories?.label ?? "",
+                            //   faf: double.parse(
+                            //       model.selectedNumberFrequenceActivity?.label ??
+                            //           ""),
+                            //   tue: double.parse(
+                            //       model.selectedNumberFrequenceUseTech?.label ??
+                            //           ""),
+                            //   calc: model.selectedAlcohol?.label ?? "",
+                            //   mtrans: model.selectedTransportation?.label ?? "",
+                            // );
+                            //  Navigator.pop(context);
                           },
                           child: const Text("Submit"),
                         ),
