@@ -720,6 +720,7 @@ class ConsultationViewModel extends ChangeNotifier {
                 ),
                 SizedBox(height: 16),
                 Text('Tingkat obesitas anda adalah: '),
+                //pasang hasil akhir yang benarnya disini
                 Text('${predictionResult}'),
                 SizedBox(height: 16),
                 ElevatedButton(
