@@ -380,7 +380,7 @@ class ConsultationViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void submit() async {
+  void submit(BuildContext context) async {
     final _rawData = await rootBundle.loadString("assets/obesity_dataset.csv");
     List<List<dynamic>> _listData =
         const CsvToListConverter().convert(_rawData);
@@ -703,6 +703,37 @@ class ConsultationViewModel extends ChangeNotifier {
 
     notifyListeners();
     print(predictionResult);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.network(
+                  'https://cdni.iconscout.com/illustration/premium/thumb/online-doctor-5303628-4431683.png?f=webp',
+                  width: 200,
+                  height: 200,
+                ),
+                SizedBox(height: 16),
+                Text('Tingkat obesitas anda adalah: '),
+                Text('${predictionResult}'),
+                SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Close'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
 
     // print('tes = ${features.series}');
 

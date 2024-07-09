@@ -183,7 +183,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => const ConsultationScreen(),
                             ),
                           );
-                        }, "https://cdni.iconscout.com/illustration/premium/thumb/obesity-problem-7869476-6324037.png",
+                        }, "https://png.pngtree.com/png-clipart/20230825/original/pngtree-fat-person-consulting-doctor-picture-image_8709152.png",
                             "Konsultasi"),
                         cardMenu(() {
                           Navigator.push(
