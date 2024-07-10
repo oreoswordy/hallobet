@@ -45,12 +45,13 @@ class ConsultationViewModel extends ChangeNotifier {
   // TransportationCategory? selectedTransportation;
 
   PickOption? selectedPickOption;
-  PickOption? selectedVegetable;
-  PickOption? selectedEat;
+  // PickOption? selectedVegetable;
+  PickOption1? selectedVegetable;
+  PickOption2? selectedEat;
   PickOption? selectedSnack;
-  PickOption? selectedDrink;
+  PickOption1? selectedDrink;
   PickOption? selectedActivity;
-  PickOption? selectedUseTech;
+  PickOption3? selectedUseTech;
   PickOption? selectedAlcohol;
 
   PickOptionYesNo? selectedObecity;
@@ -132,7 +133,7 @@ class ConsultationViewModel extends ChangeNotifier {
     }).toList();
   }
 
-  void setFrequenceVegetable(PickOption? value) {
+  void setFrequenceVegetable(PickOption1? value) {
     selectedVegetable = value;
     frequnceVegetable.text = value?.label ?? "";
     notifyListeners();
@@ -215,6 +216,30 @@ class ConsultationViewModel extends ChangeNotifier {
       );
     }).toList();
   }
+  List<DropdownMenuItem<PickOption1>> get numberPickOptionItems1 {
+    return PickOption1.values.map((choice) {
+      return DropdownMenuItem<PickOption1>(
+        value: choice,
+        child: Text(choice.label),
+      );
+    }).toList();
+  }
+  List<DropdownMenuItem<PickOption2>> get numberPickOptionItems2 {
+    return PickOption2.values.map((choice) {
+      return DropdownMenuItem<PickOption2>(
+        value: choice,
+        child: Text(choice.label),
+      );
+    }).toList();
+  }
+  List<DropdownMenuItem<PickOption3>> get numberPickOptionItems3 {
+    return PickOption3.values.map((choice) {
+      return DropdownMenuItem<PickOption3>(
+        value: choice,
+        child: Text(choice.label),
+      );
+    }).toList();
+  }
 
   List<DropdownMenuItem<PickOptionNol>> get numberPickOptionItemsNol {
     return PickOptionNol.values.map((choice) {
@@ -231,13 +256,13 @@ class ConsultationViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setVegetable(PickOption? value) {
+  void setVegetable(PickOption1? value) {
     selectedVegetable = value;
     frequnceVegetable.text = value?.label ?? "";
     notifyListeners();
   }
 
-  void setEat(PickOption? value) {
+  void setEat(PickOption2? value) {
     selectedEat = value;
     notifyListeners();
   }
@@ -248,7 +273,7 @@ class ConsultationViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setDrink(PickOption? value) {
+  void setDrink(PickOption1? value) {
     selectedDrink = value;
     frequnceDrink.text = value?.label ?? "";
     notifyListeners();
@@ -260,7 +285,7 @@ class ConsultationViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setUseTech(PickOption? value) {
+  void setUseTech(PickOption3? value) {
     selectedUseTech = value;
     frequnceUseTech.text = value?.label ?? "";
     notifyListeners();
@@ -450,12 +475,7 @@ class ConsultationViewModel extends ChangeNotifier {
     ]);
 
     // Perform prediction
-    final prediction = _classifier?.predict(features).toMatrix();
-    _predictionResult =
-        prediction?[0][0]?.toString() ?? 'Prediksi Hasil Akhir = Unknown';
-
-    notifyListeners();
-    print(predictionResult);
+    
 
     //Perhitungan Euclidean
     print('===================');
@@ -653,7 +673,7 @@ class ConsultationViewModel extends ChangeNotifier {
     // print('Inilah 3 Nilai Terdekat : ${terdekat}');
 
     // Mengambil 3 nilai terdekat dari Map
-    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 8);
+    List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 4);
     for (int i = 0; i < terdekat.length; i++) {
       print('Tujuh Nilai Terdekat, Baris ke - [${i + 1}] : ${terdekat[i]}');
     }
@@ -680,6 +700,13 @@ class ConsultationViewModel extends ChangeNotifier {
     });
 
     print('Diagnosis Terbanyak: $mostFrequentDiagnosis');
+
+    final prediction = _classifier?.predict(features).toMatrix();
+    _predictionResult =
+        prediction?[0][0]?.toString() ?? 'Prediksi Hasil Akhir = $mostFrequentDiagnosis';
+
+    notifyListeners();
+    print(predictionResult);
 
     // print('tes = ${features.series}');
 
