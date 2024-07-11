@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hallobet/model/consultation.dart';
+import 'package:hallobet/utils/apps_color.dart';
 import 'package:hallobet/view/widget/widget.dart';
 import 'package:hallobet/view_model/consultation_view_model.dart';
 import 'package:hallobet/view_model/konsultasi_view_model.dart';
@@ -254,12 +255,11 @@ class ConsultationScreen extends StatelessWidget {
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                            backgroundColor: AppsColor.accentColor,
+                            minimumSize: Size(double.infinity, 40),
                           ),
                           onPressed: () {
-                            model.submit();
+                            model.submit(context);
                             // model.predictObesityResult();
                             // model.predictObesityResult();
                             // model.predictObesityResult();
@@ -300,10 +300,13 @@ class ConsultationScreen extends StatelessWidget {
                             // );
                             //  Navigator.pop(context);
                           },
-                          child: const Text("Submit"),
+                          child: const Text(
+                            "Submit",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
-                      Text('Prediction Result: ${model.predictionResult}'),
+                      // Text('Prediction Result: ${model.predictionResult}'),
                     ],
                   );
                 },

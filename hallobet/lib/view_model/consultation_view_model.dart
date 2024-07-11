@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hallobet/model/obesity.dart';
+import 'package:hallobet/utils/apps_color.dart';
+import 'package:hallobet/view/widget/widget.dart';
 import 'package:hallobet/view_model/csv_view_model.dart';
 import 'package:ml_algo/ml_algo.dart';
 import 'package:ml_dataframe/ml_dataframe.dart';
@@ -216,6 +218,7 @@ class ConsultationViewModel extends ChangeNotifier {
       );
     }).toList();
   }
+
   List<DropdownMenuItem<PickOption1>> get numberPickOptionItems1 {
     return PickOption1.values.map((choice) {
       return DropdownMenuItem<PickOption1>(
@@ -224,6 +227,7 @@ class ConsultationViewModel extends ChangeNotifier {
       );
     }).toList();
   }
+
   List<DropdownMenuItem<PickOption2>> get numberPickOptionItems2 {
     return PickOption2.values.map((choice) {
       return DropdownMenuItem<PickOption2>(
@@ -232,6 +236,7 @@ class ConsultationViewModel extends ChangeNotifier {
       );
     }).toList();
   }
+
   List<DropdownMenuItem<PickOption3>> get numberPickOptionItems3 {
     return PickOption3.values.map((choice) {
       return DropdownMenuItem<PickOption3>(
@@ -382,7 +387,7 @@ class ConsultationViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void submit() async {
+  void submit(BuildContext context) async {
     final _rawData = await rootBundle.loadString("assets/obesity_dataset.csv");
     List<List<dynamic>> _listData =
         const CsvToListConverter().convert(_rawData);
@@ -475,7 +480,6 @@ class ConsultationViewModel extends ChangeNotifier {
     ]);
 
     // Perform prediction
-    
 
     //Perhitungan Euclidean
     print('===================');
@@ -485,7 +489,7 @@ class ConsultationViewModel extends ChangeNotifier {
     final genderValue = selectedGender?.value ?? 0;
     final usia = int.parse(usiaController.text);
     final tinggiValue = int.parse(heightController.text);
-    final tinggi = tinggiValue/100;
+    final tinggi = tinggiValue / 100;
     final berat = int.parse(weightController.text);
 
     final obesitasValue = selectedObecity?.value ?? 0;
@@ -702,11 +706,78 @@ class ConsultationViewModel extends ChangeNotifier {
     print('Diagnosis Terbanyak: $mostFrequentDiagnosis');
 
     final prediction = _classifier?.predict(features).toMatrix();
-    _predictionResult =
-        prediction?[0][0]?.toString() ?? 'Prediksi Hasil Akhir = $mostFrequentDiagnosis';
+    _predictionResult = prediction?[0][0]?.toString() ??
+        'Prediksi Hasil Akhir = $mostFrequentDiagnosis';
 
     notifyListeners();
     print(predictionResult);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'assets/image/result.gif',
+                  width: 250,
+                ),
+                const SizedBox(height: 16),
+                rowResult("Jenis Kelamin", selectedGender?.label ?? ''),
+                rowResult("Usia", "${usiaController.text} tahun"),
+                rowResult("Tinggi", "${heightController.text} cm"),
+                rowResult("Berat", "${weightController.text} kg"),
+                rowResult("Obesitas", selectedObecity?.label ?? ''),
+                rowResult("Kalori", selectedCalories?.label ?? ''),
+                rowResult("Sayur",
+                    "${selectedVegetable?.label} kali per minggu" ?? ''),
+                rowResult("Makan", "${selectedEat?.label} per hari" ?? ''),
+                rowResult("Snack", "${selectedSnack?.label} per hari" ?? ''),
+                rowResult("Rokok", selectedCigarette?.label ?? ''),
+                rowResult(
+                    "Minum", "${selectedDrink?.label} liter per hari" ?? ''),
+                rowResult(
+                    "Menghitung Kalori", selectedCountingCalories?.label ?? ''),
+                rowResult("Aktivitas",
+                    "${selectedActivity?.label} kali per minggu" ?? ''),
+                rowResult("Teknologi",
+                    "${selectedUseTech?.label} jam per hari" ?? ''),
+                rowResult(
+                    "Alkohol", "${selectedAlcohol?.label} per minggu" ?? ''),
+                rowResult("Transportasi", selectedTransportation?.label ?? ''),
+                const SizedBox(height: 16),
+                Divider(color: Colors.black),
+                const Text('Tingkat obesitas anda adalah: ',
+                    style: TextStyle(fontSize: 16)),
+                //pasang hasil akhir yang benarnya disini
+                Text(
+                  '${mostFrequentDiagnosis}',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'tutup',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppsColor.accentColor,
+                    minimumSize: Size(double.infinity, 40),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
 
     // print('tes = ${features.series}');
 
@@ -727,7 +798,7 @@ class ConsultationViewModel extends ChangeNotifier {
 
   Future<void> loadCSVData() async {
     final rawData = await rootBundle.loadString("assets/obesity_dataset.csv");
-    List<List<dynamic>> data = CsvToListConverter().convert(rawData);
+    List<List<dynamic>> data = const CsvToListConverter().convert(rawData);
 
     // final header = data.first;
     final rows = data.sublist(1);

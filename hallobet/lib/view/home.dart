@@ -183,7 +183,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => const ConsultationScreen(),
                             ),
                           );
-                        }, "https://cdni.iconscout.com/illustration/premium/thumb/obesity-problem-7869476-6324037.png",
+                        }, "https://qmed.asia/newLanding/img/homecare/virtualcare/Virtual%20Care%20How%20To%202.png",
                             "Konsultasi"),
                         cardMenu(() {
                           Navigator.push(

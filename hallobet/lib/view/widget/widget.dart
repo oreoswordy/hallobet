@@ -103,7 +103,7 @@ Widget cardMenu(Function()? func, String image, String title) {
               height: 125,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppsColor.accentColor.withOpacity(0.50),
+                color: AppsColor.accentColor.withOpacity(0.25),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
@@ -214,5 +214,21 @@ AppBar appsBar() {
       style: TextStyle(
           fontFamily: 'Gotham', fontSize: 18, color: AppsColor.accentColor),
     ),
+  );
+}
+
+Widget rowResult(String title, String result) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text(
+        title,
+        style: TextStyle(fontSize: 16),
+      ),
+      Text(
+        result,
+        style: TextStyle(fontSize: 16),
+      ),
+    ],
   );
 }
