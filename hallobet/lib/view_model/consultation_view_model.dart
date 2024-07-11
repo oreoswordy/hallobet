@@ -724,7 +724,7 @@ class ConsultationViewModel extends ChangeNotifier {
               children: [
                 Image.asset(
                   'assets/image/result.gif',
-                  width: 250,
+                  width: MediaQuery.of(context).size.width * 0.5,
                 ),
                 const SizedBox(height: 16),
                 rowResult("Jenis Kelamin", selectedGender?.label ?? ''),
