@@ -387,41 +387,461 @@ class ConsultationViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ========== submit asli ==========
+  // void submit(BuildContext context) async {
+  //   final _rawData = await rootBundle.loadString("assets/obesity_dataset.csv");
+  //   List<List<dynamic>> _listData =
+  //       const CsvToListConverter().convert(_rawData);
+
+  //   final samples = DataFrame.fromRawCsv(_rawData, headerExists: true);
+  //   final targetName = 'NObeyesdad';
+
+  //   // _classifier = KnnClassifier(
+  //   //     samples, targetName, k, // The number of nearest neighbours
+  //   //     distance: Distance.euclidean);
+  //   // for (int i = 0; i < 1; i++) {
+  //   //   final dataRow = samples.rows.elementAt(i).toList();
+  //   //   final csvGenderValue = dataRow[0] as num;
+  //   //   final csvUsiaValue = dataRow[1] as num;
+  //   //   final csvTinggiValue = dataRow[2] as num;
+  //   //   final csvBeratValue = dataRow[3] as num;
+  //   //   final csvObesitasValue = dataRow[4] as num;
+  //   //   final csvKaloriValue = dataRow[5] as num;
+  //   //   final csvSayurValue = dataRow[6] as num;
+  //   //   final csvMakanValue = dataRow[7] as num;
+  //   //   final csvSnackValue = dataRow[8] as num;
+  //   //   final csvRokokValue = dataRow[9] as num;
+  //   //   final csvMinumValue = dataRow[10] as num;
+  //   //   final csvMenghitungKaloriValue = dataRow[11] as num;
+  //   //   final csvAktivitasValue = dataRow[12] as num;
+  //   //   final csvTeknologiValue = dataRow[13] as num;
+  //   //   final csvAlkoholValue = dataRow[14] as num;
+  //   //   final csvTransportasiValue = dataRow[15] as num;
+
+  //   //   print('Nilai Index 0 baris 0 : ${csvGenderValue}');
+  //   // }
+
+  //   // print(samples);
+  //   // print(samples.rows.length);
+
+  //   print('Jenis Kelamin: ${selectedGender?.value ?? "belum diisi"}');
+  //   print('Usia: ${usiaController.text}');
+  //   print('Tinggi: ${heightController.text}');
+  //   print('Berat: ${weightController.text}');
+  //   print('Obesitas: ${selectedObecity?.value ?? "belum dipilih"}');
+  //   print('Kalori: ${selectedCalories?.value ?? "belum dipilih"}');
+  //   print('Sayur: ${selectedVegetable?.value ?? "belum dipilih"}');
+  //   print('Makan: ${selectedEat?.value ?? "belum dipilih"}');
+  //   print('Snack: ${selectedSnack?.value ?? "belum dipilih"}');
+  //   print('Rokok: ${selectedCigarette?.value ?? "belum dipilih"}');
+  //   print('Minum: ${selectedDrink?.value ?? "belum dipilih"}');
+  //   print(
+  //       'Menghitung Kalori: ${selectedCountingCalories?.value ?? "belum dipilih"}');
+  //   print('Aktivitas: ${selectedActivity?.value ?? "belum dipilih"}');
+  //   print(
+  //       'Menggunakan Teknologi: ${selectedUseTech?.value ?? "belum dipilih"}');
+  //   print('Alkohol: ${selectedAlcohol?.value ?? "belum dipilih"}');
+  //   print('Transportasi: ${selectedTransportation?.value ?? "belum dipilih"}');
+
+  //   final features = DataFrame.fromSeries([
+  //     //     Series('gender', [convertCategoricalValue(selectedGender!.label, genderMap)]),
+  //     //     Series('age', [usiaController]),
+  //     //     Series('height', [heightController]),
+  //     //     Series('weight', [weightController]),
+  //     //     Series('familyHistoryWithOverweight', [convertCategoricalValue(selectedObecity!.label, yesNoMap)]),
+  //     //     Series('favc', [convertCategoricalValue(selectedCalories!.label, yesNoMap)]),
+  //     //     Series('fcvc', [convertCategoricalValue(selectedVegetable!.label, frequencyMap)]),
+  //     //     Series('ncp', [convertCategoricalValue(selectedEat!.label, frequencyMap)]),
+  //     //     Series('caec', [convertCategoricalValue(selectedSnack!.label, frequencyMap)]),
+  //     //     Series('smoke', [convertCategoricalValue(selectedCigarette!.label, yesNoMap)]),
+  //     //     Series('ch2o', [convertCategoricalValue(selectedDrink!.label, frequencyMap)]),
+  //     //     Series('scc', [convertCategoricalValue(selectedCountingCalories!.label, yesNoMap)]),
+  //     //     Series('faf', [convertCategoricalValue(selectedActivity!.label, frequencyMap)]),
+  //     //     Series('tue', [convertCategoricalValue(selectedUseTech!.label, frequencyMap)]),
+  //     //     Series('calc', [convertCategoricalValue(selectedAlcohol!.label, frequencyMap)]),
+  //     //     Series('mtrans', [convertCategoricalValue(selectedTransportation!.label, transportationMap)]),
+
+  //     Series('genders', [selectedGender?.value]),
+  //     Series('age', [usiaController.text]),
+  //     Series('height', [heightController.text]),
+  //     Series('weight', [weightController.text]),
+  //     Series('familyHistoryWithOverweight', [selectedObecity?.value]),
+  //     Series('favc', [selectedCalories?.value]),
+  //     Series('fcvc', [selectedVegetable?.value]),
+  //     Series('ncp', [selectedEat?.value]),
+  //     Series('caec', [selectedSnack?.value]),
+  //     Series('smoke', [selectedCigarette?.value]),
+  //     Series('ch2o', [selectedDrink?.value]),
+  //     Series('scc', [selectedCountingCalories?.value]),
+  //     Series('faf', [selectedActivity?.value]),
+  //     Series('tue', [selectedUseTech?.value]),
+  //     Series('calc', [selectedAlcohol?.value]),
+  //     Series('mtrans', [selectedTransportation?.value]),
+  //     // Add other fields as needed
+  //   ]);
+
+  //   // Perform prediction
+
+  //   //Perhitungan Euclidean
+  //   print('===================');
+  //   print(' Hitung Euclidean');
+
+  //   // Mengambil Nilai Inputan User lalu mengubahnya menjadi angka yang bisa dihitung
+  //   final genderValue = selectedGender?.value ?? 0;
+  //   final usia = int.parse(usiaController.text);
+  //   final tinggiValue = int.parse(heightController.text);
+  //   final tinggi = tinggiValue / 100;
+  //   final berat = int.parse(weightController.text);
+
+  //   final obesitasValue = selectedObecity?.value ?? 0;
+  //   final kaloriValue = selectedCalories?.value ?? 0;
+  //   final sayurValue = selectedVegetable?.value ?? 0;
+  //   final makanValue = selectedEat?.value ?? 0;
+  //   final snackValue = selectedSnack?.value ?? 0;
+  //   final rokokValue = selectedCigarette?.value ?? 0;
+  //   final minumValue = selectedDrink?.value ?? 0;
+  //   final menghitungKaloriValue = selectedCountingCalories?.value ?? 0;
+  //   final aktivitasValue = selectedActivity?.value ?? 0;
+  //   final teknologiValue = selectedUseTech?.value ?? 0;
+  //   final alkoholValue = selectedAlcohol?.value ?? 0;
+  //   final transportasiValue = selectedTransportation?.value ?? 0;
+
+  //   // Ini hanya pengecekan apakah nilai inputan user bisa digunakan untuk perhitungan
+  //   // int hitung = genderValue +
+  //   //     usia +
+  //   //     tinggi +
+  //   //     berat +
+  //   //     obesitasValue +
+  //   //     kaloriValue +
+  //   //     sayurValue +
+  //   //     makanValue +
+  //   //     snackValue +
+  //   //     rokokValue +
+  //   //     minumValue +
+  //   //     menghitungKaloriValue +
+  //   //     aktivitasValue +
+  //   //     teknologiValue +
+  //   //     alkoholValue +
+  //   //     transportasiValue;
+
+  //   // Ada hal aneh, Di dataset hanya ada 4 kategori tapi di inputan ada 5 kategori
+  //   // print('Nilai Gender Input User = $snackValue');
+  //   // print('Nilai Sayur Input User = $sayurValue');
+  //   // print('Nilai Makan Input User = $makanValue');
+  //   // print('Nilai Minum Input User = $minumValue');
+  //   // print('Nilai Tinggi Setelah Dibagi 100 = $tinggi');
+
+  //   List<double> euclidean = [];
+
+  //   List<Map<String, dynamic>> HasilAkhir = [];
+
+  //   print('=================================');
+  //   print(' Penyesuaian nilai Dataset');
+  //   print('=================================');
+
+  //   // // Fungsi Konversi Dataset
+  //   // num convertStringToNum(String value, int row) {
+  //   //   switch (row) {
+  //   //     case 4:
+  //   //     case 5:
+  //   //     case 9:
+  //   //     case 11:
+  //   //       return (value == 'yes') ? 1 : 0;
+  //   //     case 8:
+  //   //     case 14:
+  //   //       if (value == 'Sometimes') return 1;
+  //   //       if (value == 'Frequently') return 2;
+  //   //       if (value == 'Always') return 3;
+  //   //       return 0; // 'no'
+  //   //     case 15:
+  //   //       if (value == 'Public_Transportation') return 1;
+  //   //       if (value == 'Bike') return 2;
+  //   //       if (value == 'Motorbike') return 3;
+  //   //       if (value == 'Automobile') return 4;
+  //   //       return 0; // 'Walking'
+  //   //     default:
+  //   //       return 0;
+  //   //   }
+  //   // }
+
+  //   for (int i = 0; i < 2110; i++) {
+  //     final dataRow = samples.rows.elementAt(i).toList();
+  //     final csvGenderValue = dataRow[0] as num;
+  //     final csvUsiaValue = dataRow[1] as num;
+  //     final csvTinggiValue = dataRow[2] as num;
+  //     final csvBeratValue = dataRow[3] as num;
+  //     final csvObesitasValue = dataRow[4] as num;
+  //     final csvKaloriValue = dataRow[5] as num;
+  //     final csvSayurValue = dataRow[6] as num;
+  //     final csvMakanValue = dataRow[7] as num;
+  //     final csvSnackValue = dataRow[8] as num;
+  //     final csvRokokValue = dataRow[9] as num;
+  //     final csvMinumValue = dataRow[10] as num;
+  //     final csvMenghitungKaloriValue = dataRow[11] as num;
+  //     final csvAktivitasValue = dataRow[12] as num;
+  //     final csvTeknologiValue = dataRow[13] as num;
+  //     final csvAlkoholValue = dataRow[14] as num;
+  //     final csvTransportasiValue = dataRow[15] as num;
+  //     final csvDiagnosis = dataRow[16] as String;
+
+  //     // Digunakan untuk pengecekan dataset apakah data yang diambil sdh sesuai
+  //     // print('Nilai Index 0 baris ${i + 1} : ${csvGenderValue}');
+  //     // print('Nilai Index 1 baris ${i + 1} : ${csvUsiaValue}');
+  //     // print('Nilai Index 2 baris ${i + 1} : ${csvTinggiValue}');
+  //     // print('Nilai Index 3 baris ${i + 1} : ${csvBeratValue}');
+  //     // print('Nilai Index 4 baris ${i + 1} : ${csvObesitasValue}');
+  //     // print('Nilai Index 5 baris ${i + 1} : ${csvKaloriValue}');
+  //     // print('Nilai Index 6 baris ${i + 1} : ${csvSayurValue}');
+  //     // print('Nilai Index 7 baris ${i + 1} : ${csvMakanValue}');
+  //     // print('Nilai Index 8 baris ${i + 1} : ${csvSnackValue}');
+  //     // print('Nilai Index 9 baris ${i + 1} : ${csvRokokValue}');
+  //     // print('Nilai Index 10 baris ${i + 1} : ${csvMinumValue}');
+  //     // print('Nilai Index 11 baris ${i + 1} : ${csvMenghitungKaloriValue}');
+  //     // print('Nilai Index 12 baris ${i + 1} : ${csvAktivitasValue}');
+  //     // print('Nilai Index 13 baris ${i + 1} : ${csvTeknologiValue}');
+  //     // print('Nilai Index 14 baris ${i + 1} : ${csvAlkoholValue}');
+  //     // print('Nilai Index 15 baris ${i + 1} : ${csvTransportasiValue}');
+  //     // print('Nilai Index 16 baris ${i + 1} : ${csvDiagnosis}');
+
+  //     // Ini hanya pengecekan apakah nilai yang diambil dari dataset bisa digunakan untuk perhitungan
+  //     // final teshitung = csvGenderValue +
+  //     //     csvUsiaValue +
+  //     //     csvTinggiValue +
+  //     //     csvBeratValue +
+  //     //     csvSayurValue +
+  //     //     csvMakanValue +
+  //     //     csvMinumValue +
+  //     //     csvAktivitasValue +
+  //     //     csvTeknologiValue;
+  //     // print('Nilai Akhir dataset baris ${i + 1} : ${teshitung}');
+
+  //     // Perhitungan Euclidean
+  //     final hitung = pow(genderValue - csvGenderValue, 2) +
+  //         pow(usia - csvUsiaValue, 2) +
+  //         pow(tinggi - csvTinggiValue, 2) +
+  //         pow(berat - csvBeratValue, 2) +
+  //         pow(obesitasValue - csvObesitasValue, 2) +
+  //         pow(kaloriValue - csvKaloriValue, 2) +
+  //         pow(sayurValue - csvSayurValue, 2) +
+  //         pow(makanValue - csvMakanValue, 2) +
+  //         pow(snackValue - csvSnackValue, 2) +
+  //         pow(rokokValue - csvRokokValue, 2) +
+  //         pow(minumValue - csvMinumValue, 2) +
+  //         pow(menghitungKaloriValue - csvMenghitungKaloriValue, 2) +
+  //         pow(aktivitasValue - csvAktivitasValue, 2) +
+  //         pow(teknologiValue - csvTeknologiValue, 2) +
+  //         pow(alkoholValue - csvAlkoholValue, 2) +
+  //         pow(transportasiValue - csvTransportasiValue, 2);
+  //     final pangkat = sqrt(hitung);
+
+  //     // Fungsi untuk menambahkan data ke dalam List
+  //     // euclidean.add(pangkat);
+
+  //     HasilAkhir.add({
+  //       'result': pangkat,
+  //       'diagnosis': csvDiagnosis,
+  //     });
+
+  //     // print('Nilai  baris ke - ${i + 1} : ${hitung}');
+  //     // print('=================================');
+  //   }
+
+  //   print('=================================');
+  //   print(' Hasil Hitung Euclidean Distance ');
+  //   print('=================================');
+
+  //   // Pemanggilan Nilai List Euclidean Harus dipanggil diluar Iterasi
+  //   // print('Nilai  euclidean baris ke 2 : ${euclidean[1]}');
+
+  //   // Hasil Nilai Hitung Euclidean
+  //   // for (int i = 0; i < euclidean.length; i++) {
+  //   //   print('Nilai euclidean baris ke - [${i + 1}] = ${euclidean[i]}');
+  //   // }
+
+  //   // for (int i = 0; i < HasilAkhir.length; i++) {
+  //   //   print('Nilai Hasil Akhir Baris ke - [${i + 1}] : ${HasilAkhir[i]}');
+  //   // }
+
+  //   // Sort Hasil Euclidean
+  //   HasilAkhir.sort((a, b) => a['result'].compareTo(b['result']));
+
+  //   // euclidean.sort();
+  //   // print('=================================');
+  //   // for (int i = 0; i < HasilAkhir.length; i++) {
+  //   //   print(
+  //   //       'Hasil Euclidean setelah Sort, Baris ke - [${i + 1}] : ${HasilAkhir[i]}');
+  //   // }
+  //   // print('=================================');
+
+  //   // Mengambil nilai K terdekat dari List
+  //   // List<double> terdekat = euclidean.sublist(0, 3);
+  //   // print('Inilah 3 Nilai Terdekat : ${terdekat}');
+
+  //   // Mengambil 3 nilai terdekat dari Map
+  //   List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 4);
+  //   for (int i = 0; i < terdekat.length; i++) {
+  //     print('Tujuh Nilai Terdekat, Baris ke - [${i + 1}] : ${terdekat[i]}');
+  //   }
+  //   print('=================================');
+
+  //   // Fungsi untuk mencari Diagnosis apa yang paling sering keluar diantara tetanggga terdekat
+  //   Map<String, int> diagnosisCount = {};
+  //   for (var entry in terdekat) {
+  //     String diagnosis = entry['diagnosis'];
+  //     if (diagnosisCount.containsKey(diagnosis)) {
+  //       diagnosisCount[diagnosis] = diagnosisCount[diagnosis]! + 1;
+  //     } else {
+  //       diagnosisCount[diagnosis] = 1;
+  //     }
+  //   }
+
+  //   String mostFrequentDiagnosis = diagnosisCount.keys.first;
+  //   int maxCount = diagnosisCount[mostFrequentDiagnosis]!;
+  //   diagnosisCount.forEach((diagnosis, count) {
+  //     if (count > maxCount) {
+  //       mostFrequentDiagnosis = diagnosis;
+  //       maxCount = count;
+  //     }
+  //   });
+
+  //   print('Diagnosis Terbanyak: $mostFrequentDiagnosis');
+
+  //   final prediction = _classifier?.predict(features).toMatrix();
+  //   _predictionResult = prediction?[0][0]?.toString() ??
+  //       'Prediksi Hasil Akhir = $mostFrequentDiagnosis';
+
+  //   notifyListeners();
+  //   print(predictionResult);
+
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Dialog(
+  //         backgroundColor: Colors.white,
+  //         child: Container(
+  //           padding: const EdgeInsets.all(16),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               Image.asset(
+  //                 'assets/image/result.gif',
+  //                 width: MediaQuery.of(context).size.width * 0.5,
+  //               ),
+  //               const SizedBox(height: 16),
+  //               rowResult("Jenis Kelamin", selectedGender?.label ?? ''),
+  //               rowResult("Usia", "${usiaController.text} tahun"),
+  //               rowResult("Tinggi", "${heightController.text} cm"),
+  //               rowResult("Berat", "${weightController.text} kg"),
+  //               rowResult("Obesitas", selectedObecity?.label ?? ''),
+  //               rowResult("Kalori", selectedCalories?.label ?? ''),
+  //               rowResult("Sayur",
+  //                   "${selectedVegetable?.label} kali per minggu" ?? ''),
+  //               rowResult("Makan", "${selectedEat?.label} per hari" ?? ''),
+  //               rowResult("Snack", "${selectedSnack?.label} per hari" ?? ''),
+  //               rowResult("Rokok", selectedCigarette?.label ?? ''),
+  //               rowResult(
+  //                   "Minum", "${selectedDrink?.label} liter per hari" ?? ''),
+  //               rowResult(
+  //                   "Menghitung Kalori", selectedCountingCalories?.label ?? ''),
+  //               rowResult("Aktivitas",
+  //                   "${selectedActivity?.label} kali per minggu" ?? ''),
+  //               rowResult("Teknologi",
+  //                   "${selectedUseTech?.label} jam per hari" ?? ''),
+  //               rowResult(
+  //                   "Alkohol", "${selectedAlcohol?.label} per minggu" ?? ''),
+  //               rowResult("Transportasi", selectedTransportation?.label ?? ''),
+  //               const SizedBox(height: 16),
+  //               Divider(color: Colors.black),
+  //               const Text('Tingkat obesitas anda adalah: ',
+  //                   style: TextStyle(fontSize: 16)),
+  //               //pasang hasil akhir yang benarnya disini
+  //               Text(
+  //                 '${mostFrequentDiagnosis}',
+  //                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+  //               ),
+  //               const SizedBox(height: 16),
+  //               ElevatedButton(
+  //                 onPressed: () {
+  //                   Navigator.pop(context);
+  //                 },
+  //                 child: const Text(
+  //                   'tutup',
+  //                   style: TextStyle(color: Colors.white),
+  //                 ),
+  //                 style: ElevatedButton.styleFrom(
+  //                   backgroundColor: AppsColor.accentColor,
+  //                   minimumSize: Size(double.infinity, 40),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+
+  //   // print('tes = ${features.series}');
+
+  //   //   KnnClassifier? _classifier;
+  //   //Sumber Error
+
+  //   // _classifier = KnnClassifier(
+  //   //   samples,
+  //   //   targetName,
+  //   //   3, // The number of nearest neighbours
+  //   //   distance: Distance.euclidean,
+  //   // );
+
+  //   // final predict = _classifier?.predict(samples).toMatrix();
+
+  //   // predict?[0][0].toString();
+  // }
+
+  // ========== submit edited ==========
   void submit(BuildContext context) async {
+    // Check if any data is empty
+    if (selectedGender == null ||
+        usiaController.text.isEmpty ||
+        heightController.text.isEmpty ||
+        weightController.text.isEmpty ||
+        selectedObecity == null ||
+        selectedCalories == null ||
+        selectedVegetable == null ||
+        selectedEat == null ||
+        selectedSnack == null ||
+        selectedCigarette == null ||
+        selectedDrink == null ||
+        selectedCountingCalories == null ||
+        selectedActivity == null ||
+        selectedUseTech == null ||
+        selectedAlcohol == null ||
+        selectedTransportation == null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Data Belum Diisi'),
+            content: Text('Mohon lengkapi semua data sebelum submit.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Tutup'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
     final _rawData = await rootBundle.loadString("assets/obesity_dataset.csv");
     List<List<dynamic>> _listData =
         const CsvToListConverter().convert(_rawData);
 
     final samples = DataFrame.fromRawCsv(_rawData, headerExists: true);
     final targetName = 'NObeyesdad';
-
-    // _classifier = KnnClassifier(
-    //     samples, targetName, k, // The number of nearest neighbours
-    //     distance: Distance.euclidean);
-    // for (int i = 0; i < 1; i++) {
-    //   final dataRow = samples.rows.elementAt(i).toList();
-    //   final csvGenderValue = dataRow[0] as num;
-    //   final csvUsiaValue = dataRow[1] as num;
-    //   final csvTinggiValue = dataRow[2] as num;
-    //   final csvBeratValue = dataRow[3] as num;
-    //   final csvObesitasValue = dataRow[4] as num;
-    //   final csvKaloriValue = dataRow[5] as num;
-    //   final csvSayurValue = dataRow[6] as num;
-    //   final csvMakanValue = dataRow[7] as num;
-    //   final csvSnackValue = dataRow[8] as num;
-    //   final csvRokokValue = dataRow[9] as num;
-    //   final csvMinumValue = dataRow[10] as num;
-    //   final csvMenghitungKaloriValue = dataRow[11] as num;
-    //   final csvAktivitasValue = dataRow[12] as num;
-    //   final csvTeknologiValue = dataRow[13] as num;
-    //   final csvAlkoholValue = dataRow[14] as num;
-    //   final csvTransportasiValue = dataRow[15] as num;
-
-    //   print('Nilai Index 0 baris 0 : ${csvGenderValue}');
-    // }
-
-    // print(samples);
-    // print(samples.rows.length);
 
     print('Jenis Kelamin: ${selectedGender?.value ?? "belum diisi"}');
     print('Usia: ${usiaController.text}');
@@ -443,23 +863,6 @@ class ConsultationViewModel extends ChangeNotifier {
     print('Transportasi: ${selectedTransportation?.value ?? "belum dipilih"}');
 
     final features = DataFrame.fromSeries([
-      //     Series('gender', [convertCategoricalValue(selectedGender!.label, genderMap)]),
-      //     Series('age', [usiaController]),
-      //     Series('height', [heightController]),
-      //     Series('weight', [weightController]),
-      //     Series('familyHistoryWithOverweight', [convertCategoricalValue(selectedObecity!.label, yesNoMap)]),
-      //     Series('favc', [convertCategoricalValue(selectedCalories!.label, yesNoMap)]),
-      //     Series('fcvc', [convertCategoricalValue(selectedVegetable!.label, frequencyMap)]),
-      //     Series('ncp', [convertCategoricalValue(selectedEat!.label, frequencyMap)]),
-      //     Series('caec', [convertCategoricalValue(selectedSnack!.label, frequencyMap)]),
-      //     Series('smoke', [convertCategoricalValue(selectedCigarette!.label, yesNoMap)]),
-      //     Series('ch2o', [convertCategoricalValue(selectedDrink!.label, frequencyMap)]),
-      //     Series('scc', [convertCategoricalValue(selectedCountingCalories!.label, yesNoMap)]),
-      //     Series('faf', [convertCategoricalValue(selectedActivity!.label, frequencyMap)]),
-      //     Series('tue', [convertCategoricalValue(selectedUseTech!.label, frequencyMap)]),
-      //     Series('calc', [convertCategoricalValue(selectedAlcohol!.label, frequencyMap)]),
-      //     Series('mtrans', [convertCategoricalValue(selectedTransportation!.label, transportationMap)]),
-
       Series('genders', [selectedGender?.value]),
       Series('age', [usiaController.text]),
       Series('height', [heightController.text]),
@@ -476,16 +879,12 @@ class ConsultationViewModel extends ChangeNotifier {
       Series('tue', [selectedUseTech?.value]),
       Series('calc', [selectedAlcohol?.value]),
       Series('mtrans', [selectedTransportation?.value]),
-      // Add other fields as needed
     ]);
 
-    // Perform prediction
-
-    //Perhitungan Euclidean
+    // Perform prediction and calculations
     print('===================');
     print(' Hitung Euclidean');
 
-    // Mengambil Nilai Inputan User lalu mengubahnya menjadi angka yang bisa dihitung
     final genderValue = selectedGender?.value ?? 0;
     final usia = int.parse(usiaController.text);
     final tinggiValue = int.parse(heightController.text);
@@ -505,63 +904,12 @@ class ConsultationViewModel extends ChangeNotifier {
     final alkoholValue = selectedAlcohol?.value ?? 0;
     final transportasiValue = selectedTransportation?.value ?? 0;
 
-    // Ini hanya pengecekan apakah nilai inputan user bisa digunakan untuk perhitungan
-    // int hitung = genderValue +
-    //     usia +
-    //     tinggi +
-    //     berat +
-    //     obesitasValue +
-    //     kaloriValue +
-    //     sayurValue +
-    //     makanValue +
-    //     snackValue +
-    //     rokokValue +
-    //     minumValue +
-    //     menghitungKaloriValue +
-    //     aktivitasValue +
-    //     teknologiValue +
-    //     alkoholValue +
-    //     transportasiValue;
-
-    // Ada hal aneh, Di dataset hanya ada 4 kategori tapi di inputan ada 5 kategori
-    // print('Nilai Gender Input User = $snackValue');
-    // print('Nilai Sayur Input User = $sayurValue');
-    // print('Nilai Makan Input User = $makanValue');
-    // print('Nilai Minum Input User = $minumValue');
-    // print('Nilai Tinggi Setelah Dibagi 100 = $tinggi');
-
     List<double> euclidean = [];
-
     List<Map<String, dynamic>> HasilAkhir = [];
 
     print('=================================');
     print(' Penyesuaian nilai Dataset');
     print('=================================');
-
-    // // Fungsi Konversi Dataset
-    // num convertStringToNum(String value, int row) {
-    //   switch (row) {
-    //     case 4:
-    //     case 5:
-    //     case 9:
-    //     case 11:
-    //       return (value == 'yes') ? 1 : 0;
-    //     case 8:
-    //     case 14:
-    //       if (value == 'Sometimes') return 1;
-    //       if (value == 'Frequently') return 2;
-    //       if (value == 'Always') return 3;
-    //       return 0; // 'no'
-    //     case 15:
-    //       if (value == 'Public_Transportation') return 1;
-    //       if (value == 'Bike') return 2;
-    //       if (value == 'Motorbike') return 3;
-    //       if (value == 'Automobile') return 4;
-    //       return 0; // 'Walking'
-    //     default:
-    //       return 0;
-    //   }
-    // }
 
     for (int i = 0; i < 2110; i++) {
       final dataRow = samples.rows.elementAt(i).toList();
@@ -583,38 +931,6 @@ class ConsultationViewModel extends ChangeNotifier {
       final csvTransportasiValue = dataRow[15] as num;
       final csvDiagnosis = dataRow[16] as String;
 
-      // Digunakan untuk pengecekan dataset apakah data yang diambil sdh sesuai
-      // print('Nilai Index 0 baris ${i + 1} : ${csvGenderValue}');
-      // print('Nilai Index 1 baris ${i + 1} : ${csvUsiaValue}');
-      // print('Nilai Index 2 baris ${i + 1} : ${csvTinggiValue}');
-      // print('Nilai Index 3 baris ${i + 1} : ${csvBeratValue}');
-      // print('Nilai Index 4 baris ${i + 1} : ${csvObesitasValue}');
-      // print('Nilai Index 5 baris ${i + 1} : ${csvKaloriValue}');
-      // print('Nilai Index 6 baris ${i + 1} : ${csvSayurValue}');
-      // print('Nilai Index 7 baris ${i + 1} : ${csvMakanValue}');
-      // print('Nilai Index 8 baris ${i + 1} : ${csvSnackValue}');
-      // print('Nilai Index 9 baris ${i + 1} : ${csvRokokValue}');
-      // print('Nilai Index 10 baris ${i + 1} : ${csvMinumValue}');
-      // print('Nilai Index 11 baris ${i + 1} : ${csvMenghitungKaloriValue}');
-      // print('Nilai Index 12 baris ${i + 1} : ${csvAktivitasValue}');
-      // print('Nilai Index 13 baris ${i + 1} : ${csvTeknologiValue}');
-      // print('Nilai Index 14 baris ${i + 1} : ${csvAlkoholValue}');
-      // print('Nilai Index 15 baris ${i + 1} : ${csvTransportasiValue}');
-      // print('Nilai Index 16 baris ${i + 1} : ${csvDiagnosis}');
-
-      // Ini hanya pengecekan apakah nilai yang diambil dari dataset bisa digunakan untuk perhitungan
-      // final teshitung = csvGenderValue +
-      //     csvUsiaValue +
-      //     csvTinggiValue +
-      //     csvBeratValue +
-      //     csvSayurValue +
-      //     csvMakanValue +
-      //     csvMinumValue +
-      //     csvAktivitasValue +
-      //     csvTeknologiValue;
-      // print('Nilai Akhir dataset baris ${i + 1} : ${teshitung}');
-
-      // Perhitungan Euclidean
       final hitung = pow(genderValue - csvGenderValue, 2) +
           pow(usia - csvUsiaValue, 2) +
           pow(tinggi - csvTinggiValue, 2) +
@@ -633,57 +949,23 @@ class ConsultationViewModel extends ChangeNotifier {
           pow(transportasiValue - csvTransportasiValue, 2);
       final pangkat = sqrt(hitung);
 
-      // Fungsi untuk menambahkan data ke dalam List
-      // euclidean.add(pangkat);
-
       HasilAkhir.add({
         'result': pangkat,
         'diagnosis': csvDiagnosis,
       });
-
-      // print('Nilai  baris ke - ${i + 1} : ${hitung}');
-      // print('=================================');
     }
 
     print('=================================');
     print(' Hasil Hitung Euclidean Distance ');
     print('=================================');
 
-    // Pemanggilan Nilai List Euclidean Harus dipanggil diluar Iterasi
-    // print('Nilai  euclidean baris ke 2 : ${euclidean[1]}');
-
-    // Hasil Nilai Hitung Euclidean
-    // for (int i = 0; i < euclidean.length; i++) {
-    //   print('Nilai euclidean baris ke - [${i + 1}] = ${euclidean[i]}');
-    // }
-
-    // for (int i = 0; i < HasilAkhir.length; i++) {
-    //   print('Nilai Hasil Akhir Baris ke - [${i + 1}] : ${HasilAkhir[i]}');
-    // }
-
-    // Sort Hasil Euclidean
     HasilAkhir.sort((a, b) => a['result'].compareTo(b['result']));
-
-    // euclidean.sort();
-    // print('=================================');
-    // for (int i = 0; i < HasilAkhir.length; i++) {
-    //   print(
-    //       'Hasil Euclidean setelah Sort, Baris ke - [${i + 1}] : ${HasilAkhir[i]}');
-    // }
-    // print('=================================');
-
-    // Mengambil nilai K terdekat dari List
-    // List<double> terdekat = euclidean.sublist(0, 3);
-    // print('Inilah 3 Nilai Terdekat : ${terdekat}');
-
-    // Mengambil 3 nilai terdekat dari Map
     List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 4);
     for (int i = 0; i < terdekat.length; i++) {
       print('Tujuh Nilai Terdekat, Baris ke - [${i + 1}] : ${terdekat[i]}');
     }
     print('=================================');
 
-    // Fungsi untuk mencari Diagnosis apa yang paling sering keluar diantara tetanggga terdekat
     Map<String, int> diagnosisCount = {};
     for (var entry in terdekat) {
       String diagnosis = entry['diagnosis'];
@@ -708,9 +990,7 @@ class ConsultationViewModel extends ChangeNotifier {
     final prediction = _classifier?.predict(features).toMatrix();
     _predictionResult = prediction?[0][0]?.toString() ??
         'Prediksi Hasil Akhir = $mostFrequentDiagnosis';
-
-    notifyListeners();
-    print(predictionResult);
+    print(_predictionResult);
 
     showDialog(
       context: context,
@@ -731,8 +1011,9 @@ class ConsultationViewModel extends ChangeNotifier {
                 rowResult("Usia", "${usiaController.text} tahun"),
                 rowResult("Tinggi", "${heightController.text} cm"),
                 rowResult("Berat", "${weightController.text} kg"),
-                rowResult("Obesitas", selectedObecity?.label ?? ''),
-                rowResult("Kalori", selectedCalories?.label ?? ''),
+                rowResult("Keturunan Obesitas", selectedObecity?.label ?? ''),
+                rowResult(
+                    "Makanan tinggi Kalori", selectedCalories?.label ?? ''),
                 rowResult("Sayur",
                     "${selectedVegetable?.label} kali per minggu" ?? ''),
                 rowResult("Makan", "${selectedEat?.label} per hari" ?? ''),
@@ -778,22 +1059,6 @@ class ConsultationViewModel extends ChangeNotifier {
         );
       },
     );
-
-    // print('tes = ${features.series}');
-
-    //   KnnClassifier? _classifier;
-    //Sumber Error
-
-    // _classifier = KnnClassifier(
-    //   samples,
-    //   targetName,
-    //   3, // The number of nearest neighbours
-    //   distance: Distance.euclidean,
-    // );
-
-    // final predict = _classifier?.predict(samples).toMatrix();
-
-    // predict?[0][0].toString();
   }
 
   Future<void> loadCSVData() async {
