@@ -301,7 +301,7 @@ class ConsultationScreen extends StatelessWidget {
                             //  Navigator.pop(context);
                           },
                           child: const Text(
-                            "Submit",
+                            "konsultasi",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),

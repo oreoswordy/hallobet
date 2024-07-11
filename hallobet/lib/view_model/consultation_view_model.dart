@@ -821,7 +821,7 @@ class ConsultationViewModel extends ChangeNotifier {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Data Belum Diisi'),
-            content: Text('Mohon lengkapi semua data sebelum submit.'),
+            content: Text('Mohon lengkapi semua data sebelum konsultasi.'),
             actions: <Widget>[
               TextButton(
                 child: Text('Tutup'),
@@ -843,24 +843,24 @@ class ConsultationViewModel extends ChangeNotifier {
     final samples = DataFrame.fromRawCsv(_rawData, headerExists: true);
     final targetName = 'NObeyesdad';
 
-    print('Jenis Kelamin: ${selectedGender?.value ?? "belum diisi"}');
-    print('Usia: ${usiaController.text}');
-    print('Tinggi: ${heightController.text}');
-    print('Berat: ${weightController.text}');
-    print('Obesitas: ${selectedObecity?.value ?? "belum dipilih"}');
-    print('Kalori: ${selectedCalories?.value ?? "belum dipilih"}');
-    print('Sayur: ${selectedVegetable?.value ?? "belum dipilih"}');
-    print('Makan: ${selectedEat?.value ?? "belum dipilih"}');
-    print('Snack: ${selectedSnack?.value ?? "belum dipilih"}');
-    print('Rokok: ${selectedCigarette?.value ?? "belum dipilih"}');
-    print('Minum: ${selectedDrink?.value ?? "belum dipilih"}');
-    print(
-        'Menghitung Kalori: ${selectedCountingCalories?.value ?? "belum dipilih"}');
-    print('Aktivitas: ${selectedActivity?.value ?? "belum dipilih"}');
-    print(
-        'Menggunakan Teknologi: ${selectedUseTech?.value ?? "belum dipilih"}');
-    print('Alkohol: ${selectedAlcohol?.value ?? "belum dipilih"}');
-    print('Transportasi: ${selectedTransportation?.value ?? "belum dipilih"}');
+    // print('Jenis Kelamin: ${selectedGender?.value ?? "belum diisi"}');
+    // print('Usia: ${usiaController.text}');
+    // print('Tinggi: ${heightController.text}');
+    // print('Berat: ${weightController.text}');
+    // print('Obesitas: ${selectedObecity?.value ?? "belum dipilih"}');
+    // print('Kalori: ${selectedCalories?.value ?? "belum dipilih"}');
+    // print('Sayur: ${selectedVegetable?.value ?? "belum dipilih"}');
+    // print('Makan: ${selectedEat?.value ?? "belum dipilih"}');
+    // print('Snack: ${selectedSnack?.value ?? "belum dipilih"}');
+    // print('Rokok: ${selectedCigarette?.value ?? "belum dipilih"}');
+    // print('Minum: ${selectedDrink?.value ?? "belum dipilih"}');
+    // print(
+    //     'Menghitung Kalori: ${selectedCountingCalories?.value ?? "belum dipilih"}');
+    // print('Aktivitas: ${selectedActivity?.value ?? "belum dipilih"}');
+    // print(
+    //     'Menggunakan Teknologi: ${selectedUseTech?.value ?? "belum dipilih"}');
+    // print('Alkohol: ${selectedAlcohol?.value ?? "belum dipilih"}');
+    // print('Transportasi: ${selectedTransportation?.value ?? "belum dipilih"}');
 
     final features = DataFrame.fromSeries([
       Series('genders', [selectedGender?.value]),
