@@ -12,203 +12,214 @@ import 'package:hallobet/view/widget/widget.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  Future<void> _refreshPage(BuildContext context) async {
+    await Provider.of<InformationViewModel>(context, listen: false).readJson();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appsBar(),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Halo teman, ",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[500],
-                      ),
-                    ),
-                    Text(
-                      "Selamat datang di obestie!",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 12),
-              Consumer<InformationViewModel>(
-                builder: (context, viewModel, child) {
-                  return CarouselSlider(
-                    items: viewModel.items.map((item) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailInformation(
-                                    title: item.title,
-                                    image: item.image,
-                                    desc: item.description,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.only(right: 12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.2,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[300],
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        topRight: Radius.circular(10),
-                                      ),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        topRight: Radius.circular(10),
-                                      ),
-                                      child: Image.network(
-                                        item.image,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (BuildContext context,
-                                            Object exception,
-                                            StackTrace? stackTrace) {
-                                          return imageError();
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 6),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          item.title,
-                                          style: GoogleFonts.montserrat(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                          ),
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(height: 6),
-                                        Text(
-                                          item.description,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }).toList(),
-                    options: CarouselOptions(
-                      enableInfiniteScroll: false,
-                      autoPlayAnimationDuration: const Duration(seconds: 2),
-                      autoPlay: true,
-                      aspectRatio: 1.25,
-                      viewportFraction: 0.9,
-                    ),
-                  );
-                },
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Menu",
-                      style: GoogleFonts.montserrat(
-                        textStyle: const TextStyle(
+      body: RefreshIndicator(
+        onRefresh: () => _refreshPage(context),
+        child: SingleChildScrollView(
+          physics:
+              const AlwaysScrollableScrollPhysics(), // Ensure the scroll view can always be scrolled
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Halo teman, ",
+                        style: TextStyle(
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          fontSize: 24,
+                          color: Colors.grey[500],
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      children: [
-                        cardMenu(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const InformationScreen(),
-                            ),
-                          );
-                        }, "https://cdni.iconscout.com/illustration/premium/thumb/fat-patient-visiting-nutritionist-4991681-4167010.png",
-                            "Informasi Kesehatan"),
-                        cardMenu(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ConsultationScreen(),
-                            ),
-                          );
-                        }, "https://qmed.asia/newLanding/img/homecare/virtualcare/Virtual%20Care%20How%20To%202.png",
-                            "Konsultasi"),
-                        cardMenu(() {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AboutScreen(),
-                            ),
-                          );
-                        }, "https://cdni.iconscout.com/illustration/premium/thumb/obesity-consultation-4036155-3363868.png?f=webp",
-                            "Tentang Aplikasi"),
-                        // cardMenu(() {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => const CsvScreen(),
-                        //     ),
-                        //   );
-                        // }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",
-                        //     "Tentang Aplikasi"),
-                      ],
-                    ),
-                  ],
+                      Text(
+                        "Selamat datang di obestie!",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(height: 12),
+                Consumer<InformationViewModel>(
+                  builder: (context, viewModel, child) {
+                    return CarouselSlider(
+                      items: viewModel.items.map((item) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailInformation(
+                                      title: item.title,
+                                      image: item.image,
+                                      desc: item.description,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 12),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.2,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        ),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          topRight: Radius.circular(10),
+                                        ),
+                                        child: Image.asset(
+                                          item.image,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (BuildContext context,
+                                              Object exception,
+                                              StackTrace? stackTrace) {
+                                            return imageError();
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 6),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            item.title,
+                                            style: GoogleFonts.montserrat(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                            ),
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Text(
+                                            item.description,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }).toList(),
+                      options: CarouselOptions(
+                        enableInfiniteScroll: false,
+                        autoPlayAnimationDuration: const Duration(seconds: 2),
+                        autoPlay: true,
+                        aspectRatio: 1.25,
+                        viewportFraction: 0.9,
+                      ),
+                    );
+                  },
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Menu",
+                        style: GoogleFonts.montserrat(
+                          textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 12,
+                        children: [
+                          cardMenu(() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const InformationScreen(),
+                              ),
+                            );
+                          }, "https://cdni.iconscout.com/illustration/premium/thumb/fat-patient-visiting-nutritionist-4991681-4167010.png",
+                              "Informasi Kesehatan"),
+                          cardMenu(() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ConsultationScreen(),
+                              ),
+                            );
+                          }, "https://obesitydoctor.in/img/pageimg/tele-consultation-obesity-doctor.png",
+                              "Konsultasi"),
+                          cardMenu(() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AboutScreen(),
+                              ),
+                            );
+                          }, "https://cdni.iconscout.com/illustration/premium/thumb/obesity-consultation-4036155-3363868.png?f=webp",
+                              "Tentang Aplikasi"),
+                          // cardMenu(() {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const CsvScreen(),
+                          //     ),
+                          //   );
+                          // }, "https://cdn.icon-icons.com/icons2/2299/PNG/512/giving_medical_help_care_healthcare_hand_wash_icon_141641.png",
+                          //     "Tentang Aplikasi"),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

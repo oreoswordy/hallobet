@@ -724,7 +724,7 @@ class ConsultationViewModel extends ChangeNotifier {
   //             mainAxisSize: MainAxisSize.min,
   //             children: [
   //               Image.asset(
-  //                 'assets/image/result.gif',
+  //                 'assets/images/result.gif',
   //                 width: MediaQuery.of(context).size.width * 0.5,
   //               ),
   //               const SizedBox(height: 16),
@@ -1003,35 +1003,35 @@ class ConsultationViewModel extends ChangeNotifier {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
-                  'assets/image/result.gif',
+                  'assets/images/result.gif',
                   width: MediaQuery.of(context).size.width * 0.5,
                 ),
                 const SizedBox(height: 16),
-                rowResult("Jenis Kelamin", selectedGender?.label ?? ''),
-                rowResult("Usia", "${usiaController.text} tahun"),
-                rowResult("Tinggi", "${heightController.text} cm"),
-                rowResult("Berat", "${weightController.text} kg"),
-                rowResult("Keturunan Obesitas", selectedObecity?.label ?? ''),
-                rowResult(
-                    "Makanan tinggi Kalori", selectedCalories?.label ?? ''),
-                rowResult("Sayur",
-                    "${selectedVegetable?.label} kali per minggu" ?? ''),
-                rowResult("Makan", "${selectedEat?.label} per hari" ?? ''),
-                rowResult("Snack", "${selectedSnack?.label} per hari" ?? ''),
-                rowResult("Rokok", selectedCigarette?.label ?? ''),
-                rowResult(
-                    "Minum", "${selectedDrink?.label} liter per hari" ?? ''),
-                rowResult(
-                    "Menghitung Kalori", selectedCountingCalories?.label ?? ''),
-                rowResult("Aktivitas",
-                    "${selectedActivity?.label} kali per minggu" ?? ''),
-                rowResult("Teknologi",
-                    "${selectedUseTech?.label} jam per hari" ?? ''),
-                rowResult(
-                    "Alkohol", "${selectedAlcohol?.label} per minggu" ?? ''),
-                rowResult("Transportasi", selectedTransportation?.label ?? ''),
-                const SizedBox(height: 16),
-                Divider(color: Colors.black),
+                // rowResult("Jenis Kelamin", selectedGender?.label ?? ''),
+                // rowResult("Usia", "${usiaController.text} tahun"),
+                // rowResult("Tinggi", "${heightController.text} cm"),
+                // rowResult("Berat", "${weightController.text} kg"),
+                // rowResult("Keturunan Obesitas", selectedObecity?.label ?? ''),
+                // rowResult(
+                //     "Makanan tinggi Kalori", selectedCalories?.label ?? ''),
+                // rowResult("Sayur",
+                //     "${selectedVegetable?.label} kali per minggu" ?? ''),
+                // rowResult("Makan", "${selectedEat?.label} per hari" ?? ''),
+                // rowResult("Snack", "${selectedSnack?.label} per hari" ?? ''),
+                // rowResult("Rokok", selectedCigarette?.label ?? ''),
+                // rowResult(
+                //     "Minum", "${selectedDrink?.label} liter per hari" ?? ''),
+                // rowResult(
+                //     "Menghitung Kalori", selectedCountingCalories?.label ?? ''),
+                // rowResult("Aktivitas",
+                //     "${selectedActivity?.label} kali per minggu" ?? ''),
+                // rowResult("Teknologi",
+                //     "${selectedUseTech?.label} jam per hari" ?? ''),
+                // rowResult(
+                //     "Alkohol", "${selectedAlcohol?.label} per minggu" ?? ''),
+                // rowResult("Transportasi", selectedTransportation?.label ?? ''),
+                // const SizedBox(height: 16),
+                // Divider(color: Colors.black),
                 const Text('Tingkat obesitas anda adalah: ',
                     style: TextStyle(fontSize: 16)),
                 //pasang hasil akhir yang benarnya disini

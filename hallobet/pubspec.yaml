@@ -28,7 +28,7 @@ flutter:
   assets:
     - assets/dummy.json
     - assets/obesity_dataset.csv
-    - assets/image/
+    - assets/images/
     - assets/fonts/
 
   fonts:

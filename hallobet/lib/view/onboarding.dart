@@ -13,7 +13,7 @@ class OnBoardingScreen extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage("assets/image/onboarding.png")),
+            image: AssetImage("assets/images/onboarding.png")),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -23,7 +23,7 @@ class OnBoardingScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.asset("assets/image/onboard.png"),
+              child: Image.asset("assets/images/onboard.png"),
             ),
             const SizedBox(height: 24),
             Text(
