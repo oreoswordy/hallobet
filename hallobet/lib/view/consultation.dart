@@ -37,17 +37,17 @@ class ConsultationScreen extends StatelessWidget {
                       titleConsultation("Usia"),
                       const SizedBox(height: 12),
                       textFieldConsultation(
-                          "Masukkan Usia", model.usiaController),
+                          "Masukkan Usia", model.usiaController, "tahun"),
                       const SizedBox(height: 24),
                       titleConsultation("Tinggi Badan"),
                       const SizedBox(height: 12),
                       textFieldConsultation(
-                          "Masukkan Tinggi Badan", model.heightController),
+                          "Masukkan Tinggi Badan", model.heightController, "cm"),
                       const SizedBox(height: 24),
                       titleConsultation("Berat Badan"),
                       const SizedBox(height: 12),
                       textFieldConsultation(
-                          "Masukkan Berat Badan", model.weightController),
+                          "Masukkan Berat Badan", model.weightController, "kg"),
                       const SizedBox(height: 24),
                       titleConsultation(
                           "Apakah Anda memiliki riwayat keturunan obesitas ?"),

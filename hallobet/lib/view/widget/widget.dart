@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hallobet/utils/apps_color.dart';
 
-Widget textFieldConsultation(String hint, TextEditingController controller) {
-  return TextField(
-    keyboardType: TextInputType.number,
-    controller: controller,
-    decoration: InputDecoration(
-      hintText: hint,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+Widget textFieldConsultation(String hint, TextEditingController controller, String subtitle) {
+  return Row(
+    children: [
+      Expanded(
+        child: TextField(
+          inputFormatters: [
+            FilteringTextInputFormatter.deny(RegExp(r'[.,]')),
+          ],
+          keyboardType: TextInputType.number,
+          controller: controller,
+          decoration: InputDecoration(
+            hintText: hint,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
       ),
-    ),
+      SizedBox(width: 8),
+      Text(subtitle, style: TextStyle(fontSize: 12),),
+    ],
   );
 }
 
