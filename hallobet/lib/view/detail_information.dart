@@ -3,9 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hallobet/view/widget/widget.dart';
 
 class DetailInformation extends StatelessWidget {
-  String title;
-  String image;
-  String desc;
+  final String title;
+  final String image;
+  final String desc;
+
   DetailInformation({
     super.key,
     required this.title,
@@ -45,14 +46,13 @@ class DetailInformation extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 24),
               Text(
-                """
-$desc
-                """,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: MediaQuery.of(context).size.width * 0.045,
+                desc,
+                textAlign: TextAlign.justify,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ],

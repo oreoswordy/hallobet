@@ -36,12 +36,15 @@ class OnBoardingScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            const Text(
-              textAlign: TextAlign.center,
-              'Teman obesitasmu yang akan membantumu mengatur pola makan dan olahraga agar tetap sehat dan bugar!',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: const Text(
+                textAlign: TextAlign.center,
+                'Teman obesitasmu yang selalu siap membantu mengetahui tingkat obesitas Anda!',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: 48),

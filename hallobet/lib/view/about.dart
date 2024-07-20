@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:hallobet/utils/apps_color.dart';
 import 'package:hallobet/view/widget/widget.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -11,22 +13,66 @@ class AboutScreen extends StatelessWidget {
       body: Container(
         margin: EdgeInsets.all(12),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage("https://media.istockphoto.com/id/1314797892/id/foto/obesitas-berat-badan-tidak-sehat-ahli-gizi-memeriksa-pinggang-wanita-menggunakan-pita-meter.jpg?s=612x612&w=0&k=20&c=ydZ4-lwelbRe7twM2KOyIa_qnSf85kiSrQ5Z53dLfYI="),
-                              ),
-                          ),
-                        ),
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(vertical: 50),
+              child: Text(
+                    'OBESTIE',
+                    style: TextStyle(
+                        fontFamily: 'Gotham', fontSize: 48, color: AppsColor.accentColor),
+                  ),
+            ),
                         SizedBox(height: 24),
-                        Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ", textAlign: TextAlign.justify),
+                        Text("Selamat datang di OBESTIE, Teman obesitasmu. Aplikasi berbasis mobile yang dikembangkan dengan framework Flutter dengan metode K-Nearest Neighbor. Solusi inovatif yang dirancang untuk mengetahui tingkat obesitas Anda.",
+              ),
+              SizedBox(height: 24),
+              Text("Apa yang Kami Tawarkan?", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+              SizedBox(height: 24),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("1. "),
+                  Expanded(
+                    child: RichText(text: TextSpan(children: [
+                                    TextSpan(text: "Kemudahan mengakses informasi kesehatan. ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                    TextSpan(text: "Pengguna dapat melihat beberapa informasi seputar obesitas."),      
+                                  ]),),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("2. "),
+                  Expanded(
+                    child: RichText(text: TextSpan(children: [
+                      TextSpan(text: "Fitur yang disediakan: ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                    TextSpan(text: "Nikmati berbagai fitur yang dirancang untuk memudahkan hidup Anda, mulai dari Konsultasi hingga Informasi Kesehatan."),      
+                                  ]),),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("3. "),
+                  Expanded(
+                    child: RichText(text: TextSpan(children: [
+                      TextSpan(text: "Support 24/7. ", style: TextStyle(fontWeight: FontWeight.bold)),
+                                    TextSpan(text: "Kami siap membantu Anda kapan saja, di mana saja."),      
+                                  ]),),
+                  ),
+                ],
+              ),
+              SizedBox(height: 24,),
+              Text("Terima kasih telah memilih OBESTIE. Kami berharap Anda menikmati pengalaman menggunakan aplikasi kami."),
           ],
         ),
       ),

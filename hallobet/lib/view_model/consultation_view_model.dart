@@ -1045,7 +1045,7 @@ class ConsultationViewModel extends ChangeNotifier {
                     Navigator.pop(context);
                   },
                   child: const Text(
-                    'tutup',
+                    'Tutup',
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(

@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Selamat datang di obestie!",
+                        "Selamat datang di Obestie!",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

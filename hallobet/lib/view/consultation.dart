@@ -119,7 +119,7 @@ class ConsultationScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 24),
-                      titleConsultation("Apakah Anda mengonsumsi cemilan ?"),
+                      titleConsultation("Seberapa sering Anda mengonsumsi cemilan?"),
                       const SizedBox(height: 12),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -301,7 +301,7 @@ class ConsultationScreen extends StatelessWidget {
                             //  Navigator.pop(context);
                           },
                           child: const Text(
-                            "konsultasi",
+                            "Konsultasi",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
