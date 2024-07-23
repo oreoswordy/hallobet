@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hallobet/utils/apps_color.dart';
 
-Widget textFieldConsultation(String hint, TextEditingController controller, String subtitle) {
+Widget textFieldConsultation(
+    String hint, TextEditingController controller, String subtitle) {
   return Row(
     children: [
       Expanded(
@@ -22,7 +23,10 @@ Widget textFieldConsultation(String hint, TextEditingController controller, Stri
         ),
       ),
       SizedBox(width: 8),
-      Text(subtitle, style: TextStyle(fontSize: 12),),
+      Text(
+        subtitle,
+        style: TextStyle(fontSize: 12),
+      ),
     ],
   );
 }
@@ -47,7 +51,7 @@ Widget cardInformation(Function()? func, BuildContext context, String image,
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(image),
+                  image: AssetImage(image),
                 ),
               ),
             ),
@@ -86,10 +90,11 @@ Widget cardInformation(Function()? func, BuildContext context, String image,
 AppBar appBarWidget(String title) {
   return AppBar(
     elevation: 0,
-    backgroundColor: Colors.white,
+    backgroundColor: AppsColor.accentColor,
     scrolledUnderElevation: 0,
     title: Text(
       title,
+      style: TextStyle(color: Colors.white),
     ),
   );
 }

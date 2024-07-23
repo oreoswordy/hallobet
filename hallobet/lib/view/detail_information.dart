@@ -42,7 +42,7 @@ class DetailInformation extends StatelessWidget {
                   ),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(image),
+                    image: AssetImage(image),
                   ),
                 ),
               ),
