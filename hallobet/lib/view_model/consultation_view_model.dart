@@ -417,6 +417,25 @@ class ConsultationViewModel extends ChangeNotifier {
     final samples = DataFrame.fromRawCsv(_rawData, headerExists: true);
     final targetName = 'NObeyesdad';
 
+    print('Jenis Kelamin: ${selectedGender?.value ?? "belum diisi"}');
+    print('Usia: ${usiaController.text}');
+    print('Tinggi: ${heightController.text}');
+    print('Berat: ${weightController.text}');
+    print('Obesitas: ${selectedObecity?.value ?? "belum dipilih"}');
+    print('Kalori: ${selectedCalories?.value ?? "belum dipilih"}');
+    print('Sayur: ${selectedVegetable?.value ?? "belum dipilih"}');
+    print('Makan: ${selectedEat?.value ?? "belum dipilih"}');
+    print('Snack: ${selectedSnack?.value ?? "belum dipilih"}');
+    print('Rokok: ${selectedCigarette?.value ?? "belum dipilih"}');
+    print('Minum: ${selectedDrink?.value ?? "belum dipilih"}');
+    print(
+        'Menghitung Kalori: ${selectedCountingCalories?.value ?? "belum dipilih"}');
+    print('Aktivitas: ${selectedActivity?.value ?? "belum dipilih"}');
+    print(
+        'Menggunakan Teknologi: ${selectedUseTech?.value ?? "belum dipilih"}');
+    print('Alkohol: ${selectedAlcohol?.value ?? "belum dipilih"}');
+    print('Transportasi: ${selectedTransportation?.value ?? "belum dipilih"}');
+
     final features = DataFrame.fromSeries([
       Series('genders', [selectedGender?.value]),
       Series('age', [usiaController.text]),
@@ -439,6 +458,7 @@ class ConsultationViewModel extends ChangeNotifier {
     // Perform prediction and calculations
     print('===================');
     print(' Hitung Euclidean');
+
 
     final genderValue = selectedGender?.value ?? 0;
     final usia = int.parse(usiaController.text);
@@ -515,6 +535,7 @@ class ConsultationViewModel extends ChangeNotifier {
     print('=================================');
 
     HasilAkhir.sort((a, b) => a['result'].compareTo(b['result']));
+    //untuk merubah K HasilAkhir.sublist(0, 7);
     List<Map<String, dynamic>> terdekat = HasilAkhir.sublist(0, 4);
     for (int i = 0; i < terdekat.length; i++) {
       print('Empat Nilai Terdekat, Baris ke - [${i + 1}] : ${terdekat[i]}');
